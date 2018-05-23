@@ -5,7 +5,7 @@ A userguide of the PPRCODE server website
 
 ## Required information
 **We only requires your protein sequence in FASTA format and your email address.** nothing more.
-However, we would like to gather the sequences and requested results in order to the usage and i
+However, we would like to gather the sequences and requested results for the usage statistics and improvement of the website.
 
 ## Analysis of the result
 
