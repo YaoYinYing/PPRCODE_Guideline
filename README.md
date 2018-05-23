@@ -6,15 +6,20 @@ A userguide of the PPRCODE server website
 
 ## Required information
 **We only requires your protein sequence in FASTA format and your email address,** nothing more.
-However, we would like to gather the sequences and requested results for the usage statistics and improvement of the website.
+However, we would like to gather the sequences and location information for the usage statistics and improvement of the website.
 
+### How do I submit a sequence to the PPRCODE predition server?
+The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
+  1. Paste your FASTA sequence in the upper text area.
+  2. Enter your email address.
+  3. Click the Submit button.
 
 
 ## Analysis of the result
 
 ## Troubleshoot
 
-If there is any problem with the website, you may contact us by [email](mailto:yaoyy@webmail.hzau.edu.cn) 
+If there is any problem and advice with the website, it is you may contact us by [email](mailto:yaoyy@webmail.hzau.edu.cn) 
 
 ## Cite information
 
