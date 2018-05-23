@@ -13,7 +13,9 @@ The registration of user is not required to the server. To submit your sequence,
   1. Paste your FASTA sequence in the upper text area.
   2. Enter your email address.
   3. Click the Submit button.
-
+ After the submission, the webpage will be automatically refreshed several times. 
+ 
+### How
 
 ## Analysis of the result
 
