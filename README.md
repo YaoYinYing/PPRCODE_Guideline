@@ -15,7 +15,7 @@ The registration of user is not required to the server. To submit your sequence,
   1. Paste your FASTA sequence in the upper text area.
   2. Enter your email address.
   3. Click the Submit button.
- After the submission, the webpage will be automatically refreshed several times until the job finished. 
+ After the submission, the webpage will be automatically refreshed several times until the job is finished. 
  
 You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo.
 
@@ -56,20 +56,26 @@ Positions | Motif Sequences | PPR-code | RNA
 529-563 | ELTYRRVVESYCRAKRFEEARGFLSEVSETDLDFD | RD | Y
 
 **Position**:
-> The boundary of a PPR motif, refined on the bases of structural and functional research result.
+> The boundary of every PPR motif refined on the bases of structural and functional research result.
 
 **Motif Sequences**:
-> The detail of PPR motif sequence.
+> The detail of PPR motifs sequence.
 
 **PPR-code**:
-> Predicted PPR code.
+> Predicted PPR codes.
 
 **RNA**:
-> Predicted RNA base the PPR code may conbined.
+> Predicted RNA bases the PPR code may conbined with.
 
 ## Troubleshoot
 
-If there is any problem and advice with the website, you are welcome to contact us by [email](mailto:yaoyy@webmail.hzau.edu.cn) 
+If there is any problem and advice with the website, you are welcome to contact us via [email](mailto:yaoyy@webmail.hzau.edu.cn) 
+
+## Contributers:
+* Yinying Yao
+* Zeyuan Guan
+* Junjie Yan
+* Xiang Wang
 
 ## Cite information
 
