@@ -26,7 +26,7 @@ Less than three minutes.
 ### _Q_: Is my submission job accessible to others?
 Before the submission, an identical job ID is generated to specify your sequence. The job is invisible without the job ID.
 
-### _Q_: How much sequences can I submit in one submission?
+### _Q_: How many sequences can I submit in one submission?
 One sequence per request is recommended. You should always **refresh** the web page before submission.
 
 ### _Q_: How much time do I have before my job is removed in server?
