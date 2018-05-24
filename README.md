@@ -11,7 +11,7 @@ However, we would like to gather the sequences and location information for the 
 
 ### _Q_: How do I submit a sequence to the PPRCODE predition server?
 
-![interface] (http://yinlab.hzau.edu.cn/pprcode/interface.png)
+![interface](http://yinlab.hzau.edu.cn/pprcode/interface.png)
 
 The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
   1. Paste your FASTA sequence in the upper text area.
