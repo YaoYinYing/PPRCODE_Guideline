@@ -2,14 +2,14 @@
 A userguide of the PPRCODE server website.
 **in contruction**
 
-## Introduction
+## FAQs
+
+### _Q_: What is PPR?
+
+### _Q_:What is PPRCODE server?
 **PPRCODE** server is an approach to PPR code and target RNA sequence predition. It first identifies the PPR motifs in an submitted sequence by PScan algorithm provided by [ProSite](https://prosite.expasy.org/). By the discrepancies between traditional and structural definitions of **PPR motif** and **PPR CODE**, the analysis result is refined to improve the quality of motif detection. After the determination of PPR motif and PPR code, the RNA sequence targeted by the protein is then generated, providing a sequence reference to any researcher interested in the PPR proteins with unknown function.
 
-## Required information
-**We only requires your protein sequence in FASTA format and your email address.**
-However, we would like to gather the sequences and location information for the usage statistics and improvement of this website.
 
-## FAQs
 ### _Q_: How do I submit a sequence to the PPRCODE prediction server?
 
 The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
@@ -32,7 +32,7 @@ One sequence per request is recommended. You should always **refresh** the web p
 ### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
 
-## Analysis of the result
+### _Q_: What does the prediction result mean to me?
 The result page contains a table like the following:
 
 > This is a demo sequence of PPR.
