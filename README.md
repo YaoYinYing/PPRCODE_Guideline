@@ -56,7 +56,7 @@ Positions | Motif Sequences | PPR-code | RNA
 529-563 | ELTYRRVVESYCRAKRFEEARGFLSEVSETDLDFD | RD | Y
 
 **Position**:
-> The boundary of a PPR motif.
+> The boundary of a PPR motif, refined on the bases of structural and functional research result.
 
 **Motif Sequences**:
 > The detail of PPR motif sequence.
