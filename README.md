@@ -34,9 +34,13 @@ Jobs may be removed **one week after they complete** to conserve disk space, and
 
 ## Analysis of the result
 The result page contains a table like the following:
-Job 1: Job sequence:
-______________________
-`Your job sequence`
+
+Positions | Motif Sequences | PPR-code | RNA
+----------|-----------------|----------|-----
+108-142 | ASALEMVVRALGREGQHDAVCALLDETPLPPGSRL | EL | ?
+144-178 | VRAYTTVLHALSRAGRYERALELFAELRRQGVAPT | TT | A
+179-213	| VVTYNTLIDGLCKAGKLDEALKLFEEMVEKGIKPD | ND | U
+
 
 
 ## Troubleshoot
