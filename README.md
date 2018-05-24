@@ -16,6 +16,8 @@ The registration of user is not required to the server. To submit your sequence,
   3. Click the Submit button.
  After the submission, the webpage will be automatically refreshed several times until the job finished. 
  
+You may also click the link marked *Click here for a sample input sequence* above the sequence area to input a demo.
+
 ### How long does a sequence take to process?
 Less than three minutes.
 
@@ -31,6 +33,10 @@ Jobs may be removed **one week after they complete** to conserve disk space, and
 ### 
 
 ## Analysis of the result
+The result page contains a table like the following:
+|Job 1: Job sequence:|
+|`Your job sequence`|
+
 
 ## Troubleshoot
 
