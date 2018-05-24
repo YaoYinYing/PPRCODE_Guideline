@@ -34,8 +34,9 @@ Jobs may be removed **one week after they complete** to conserve disk space, and
 
 ## Analysis of the result
 The result page contains a table like the following:
-|Job 1: Job sequence:|
-|`Your job sequence`|
+Job 1: Job sequence:
+______________________
+`Your job sequence`
 
 
 ## Troubleshoot
