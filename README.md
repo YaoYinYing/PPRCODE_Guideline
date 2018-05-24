@@ -18,16 +18,16 @@ The registration of user is not required to the server. To submit your sequence,
  
 You may also click the link marked *Click here for a sample input sequence* above the sequence area to input a demo.
 
-### How long does a sequence take to process?
+### _Q_: How long does a sequence take to process?
 Less than three minutes.
 
-### Is my submission job accessible to others?
+### _Q_: Is my submission job accessible to others?
 Before the submission, an identical job ID is generated to specify your sequence. 
 
-### How much sequence can I submit in one submission?
+### _Q_: How much sequence can I submit in one submission?
 One sequence per request is recommended. You should **refresh** the web page before submission.
 
-### How much time do I have before my job is removed in server?
+### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
 
 ### 
