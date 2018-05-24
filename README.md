@@ -10,7 +10,7 @@ A userguide of the PPRCODE server website.
 However, we would like to gather the sequences and location information for the usage statistics and improvement of this website.
 
 ## FAQs
-### _Q_: How do I submit a sequence to the PPRCODE predition server?
+### _Q_: How do I submit a sequence to the PPRCODE prediction server?
 
 The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
   1. Paste your FASTA sequence in the upper text area.
