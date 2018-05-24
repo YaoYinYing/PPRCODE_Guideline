@@ -11,8 +11,6 @@ However, we would like to gather the sequences and location information for the 
 
 ### _Q_: How do I submit a sequence to the PPRCODE predition server?
 
-![interface](http://yinlab.hzau.edu.cn/pprcode/interface.png)
-
 The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
   1. Paste your FASTA sequence in the upper text area.
   2. Enter your email address.
@@ -57,6 +55,17 @@ Positions | Motif Sequences | PPR-code | RNA
 494-528 | VVTYNTLIDGLCKAGKLDEALKLFEEMVEKGIKPD | ND | U
 529-563 | ELTYRRVVESYCRAKRFEEARGFLSEVSETDLDFD | RD | Y
 
+**Position**:
+> The boundary of a PPR motif.
+
+**Motif Sequences**:
+> The detail of PPR motif sequence.
+
+**PPR-code**:
+> Predicted PPR code.
+
+**RNA**:
+> Predicted RNA base the PPR code may conbined.
 
 ## Troubleshoot
 
