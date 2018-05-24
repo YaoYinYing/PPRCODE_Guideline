@@ -27,7 +27,7 @@ Less than three minutes.
 Before the submission, an identical job ID is generated to specify your sequence. The job is invisible without the job ID.
 
 ### _Q_: How many sequences can I submit in one submission?
-One sequence per request is recommended. You should always **refresh** the web page before submission.
+One sequence per request is recommended. You should always **refresh** the web page before creating another new submission.
 
 ### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
