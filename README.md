@@ -34,6 +34,9 @@ Jobs may be removed **one week after they complete** to conserve disk space, and
 
 ## Analysis of the result
 The result page contains a table like the following:
+`
+This is a demo sequence of PPR.
+`
 
 Positions | Motif Sequences | PPR-code | RNA
 ----------|-----------------|----------|-----
