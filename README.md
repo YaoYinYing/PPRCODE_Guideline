@@ -17,7 +17,7 @@ The registration of user is not required to the server. To submit your sequence,
   3. Click the Submit button.
  After the submission, the webpage will be automatically refreshed several times until the job finished. 
  
-You may also click the link marked _**Click here for a sample input sequence**_ above the sequence area to input a demo.
+You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo.
 
 ### _Q_: How long does a sequence take to process?
 Less than three minutes.
