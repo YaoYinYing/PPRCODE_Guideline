@@ -14,16 +14,19 @@ The registration of user is not required to the server. To submit your sequence,
   1. Paste your FASTA sequence in the upper text area.
   2. Enter your email address.
   3. Click the Submit button.
- After the submission, the webpage will be automatically refreshed several times. 
+ After the submission, the webpage will be automatically refreshed several times until the job finished. 
  
 ### How long does a sequence take to process?
 Less than three minutes.
 
 ### Is my submission job accessible to others?
+Before the submission, an identical job ID is generated to specify your sequence. 
 
 ### How much sequence can I submit in one submission?
+One sequence per request is recommended. You should **refresh** the web page before submission.
 
 ### How much time do I have before my job is removed in server?
+Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
 
 ### 
 
