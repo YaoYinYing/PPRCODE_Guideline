@@ -9,6 +9,7 @@ A userguide of the PPRCODE server website.
 **We only requires your protein sequence in FASTA format and your email address.**
 However, we would like to gather the sequences and location information for the usage statistics and improvement of this website.
 
+## FAQs
 ### _Q_: How do I submit a sequence to the PPRCODE predition server?
 
 The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
@@ -30,8 +31,6 @@ One sequence per request is recommended. You should always **refresh** the web p
 
 ### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
-
-### 
 
 ## Analysis of the result
 The result page contains a table like the following:
