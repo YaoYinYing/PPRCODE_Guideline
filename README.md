@@ -1,4 +1,4 @@
-# PPRCODE_Guideline
+# PPRCODE prediction server - Guideline
 A userguide to the PPRCODE server website.
 
 **This page is in contruction**
@@ -9,13 +9,13 @@ A userguide to the PPRCODE server website.
 
 
 
-### _Q_:What is PPRCODE server?
-**PPRCODE** server is an approach to PPR code and target RNA sequence predition. It first identifies the PPR motifs in an submitted sequence by PScan algorithm provided by [ProSite](https://prosite.expasy.org/). By the discrepancies between traditional and structural definitions of **PPR motif** and **PPR CODE**, the analysis result is refined to improve the quality of motif detection. After the determination of PPR motif and PPR code, the RNA sequence targeted by the protein is then generated, providing a sequence reference to any researcher interested in the PPR proteins with unknown function.
+### _Q_:What is PPRCODE prediction server?
+**PPRCODE** prediction server is an approach to PPR code and target RNA sequence predition. It first identifies the PPR motifs in an submitted sequence by PScan algorithm provided by [ProSite](https://prosite.expasy.org/). By the discrepancies between traditional and structural definitions of **PPR motif** and **PPR CODE**, the analysis result is refined to improve the quality of motif detection. After the determination of PPR motif and PPR code, the RNA sequence targeted by the protein is then generated, providing a sequence reference to any researcher interested in the PPR proteins with unknown function.
 
 
 ### _Q_: How do I submit a sequence to the PPRCODE prediction server?
 
-The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
+The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE prediction server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
   1. Paste your FASTA sequence in the upper text area.
   2. Enter your email address.
   3. Click the Submit button.
