@@ -71,6 +71,14 @@ Positions | Motif Sequences | PPR-code | RNA
 **RNA**:
 > Predicted RNA bases which the PPR codes may conbined with.
 
+### _Q_: What do the error pages mean?
+#### error code: 404
+The result is not found in database, which may be deleted, or the submission id contained in address is not complete.
+You need to resubmit your sequence, or check the right job id.
+
+#### error code: 500
+An internal error occurs in our program. This is often caused by the input sequence or email address. 
+**The server only accept sequences in FASTA format.**
 ## Troubleshoot
 
 If there is any problem and advice with the website, you are welcome to contact us via [email](mailto:yaoyy@webmail.hzau.edu.cn).
