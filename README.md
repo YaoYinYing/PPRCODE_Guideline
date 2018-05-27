@@ -5,8 +5,10 @@ A userguide to the PPRCODE server website.
 
 ## FAQs
 
-### _Q_: What is PPR?
+### _Q_: What is PPR and PPR code?
+Pentatricopeptide repeat (PPR) proteins constitute a large family whose members serve as single-stranded RNA (ssRNA)-binding proteins; these proteins are particularly abundant in terrestrial plants, as more than 400 members have been identified in Arabidopsis and rice.
 
+PPR proteins are typically characterized by tandem degenerate repeats of a 35-amino acid motif. Within a given repeat, the combinatorial di-residues at the 5th and 35th positions are responsible for specific RNA base recognition, which is consistent with bioinformatics studies. These di-residues are referred to as the **PPR code**. 
 
 
 ### _Q_:What is PPRCODE prediction server?
