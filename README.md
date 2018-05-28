@@ -40,7 +40,7 @@ Jobs may be removed **one week after they complete** to conserve disk space, and
 ### _Q_: What does the prediction result mean to me?
 The result page contains a table like the following:
 
-> This is a demo sequence of PPR.
+> This is a demo sequence of PPR10 from *Zea maize*.
 
 
 Positions | Motif Sequences | PPR-code | RNA
