@@ -77,6 +77,10 @@ Positions | Motif Sequences | PPR-code | RNA
 **RNA**:
 > Predicted RNA bases which the PPR codes may conbined with.
 
+### _Q_: Why the PPR code and RNA prediction result of my sequence looks like a mess?
+We identify the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. So it is recommended to make your own manual correction of the analysis result if there still exist problems. 
+The program cannot make everything as perfect as we wish to.
+
 ### _Q_: What do the error pages mean?
 #### error code: 404
 The result is not found in database, which may be deleted, or the submission id contained in address is not complete.
