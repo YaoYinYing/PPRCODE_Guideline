@@ -1,7 +1,9 @@
 # PPRCODE prediction server - Guideline
 A userguide to the PPRCODE server website.
 
-**This page is in contruction**
+Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
+
+**NOTE: This page is in contruction**
 
 ## FAQs
 
