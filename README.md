@@ -1,25 +1,25 @@
-# PPRCODE prediction server - Guideline
+
 A userguide to the PPRCODE server website.
 
 Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
-**NOTE: This page is under contruction**
+**NOTE: This page is still under contruction**
 
 ## FAQs
 
 ### _Q_: What is PPR and PPR code?
 Pentatricopeptide repeat (PPR) proteins constitute a large family whose members serve as single-stranded RNA (ssRNA)-binding proteins; these proteins are particularly abundant in terrestrial plants, as more than 400 members have been identified in Arabidopsis and rice.
 
-PPR proteins are typically characterized by tandem degenerate repeats of a 35-amino acid motif. Within a given repeat, the combinatorial di-residues at the 5th and 35th positions are responsible for specific RNA base recognition, which is consistent with bioinformatics studies. These di-residues are referred to as the **PPR code**. 
+PPR proteins are typically characterized by tandem degenerate repeats of a 35-amino acid motif. Within a given repeat, the combinatorial di-residues at the 5th and 35th positions are responsible for specific RNA base recognition. These di-residues are referred to as the **PPR code**. 
 
 
 ### _Q_:What is PPRCODE prediction server?
-**PPRCODE** prediction server is an approach to PPR code and target RNA sequence predition. It first identifies the PPR motifs in an submitted sequence by PScan algorithm provided by [ProSite](https://prosite.expasy.org/). By the discrepancies between traditional and structural definitions of **PPR motif** and **PPR CODE**, the analysis result is refined to improve the quality of motif detection. After the determination of PPR motif and PPR code, the RNA sequence targeted by the protein is then generated, providing a sequence reference to any researcher interested in the PPR proteins with unknown function.
+**PPRCODE** prediction server is aimed to provide services to the PPR community to facilitate PPR code and target RNA prediction. Once a PPR protein sequence is submitted, the server firstly identifies the PPR motifs using the PScan algorithm provided by Prosite, and then outputs the individual PPR motifs that is demarcated based on the PPR structure. PPR code is generally extracted from the 5th and 35th amino acids of each PPR motif, and the best matched RNA base for the PPR code is provided. As a result, the potential RNA target for the PPR sequence is available. 
 
 
 ### _Q_: How do I submit a sequence to the PPRCODE prediction server?
 
-The registration of user is not required to the server. To submit your sequence, go to the [PPRCODE prediction server](http://yinlab.hzau.edu.cn/pprcode/) submission form and do the following:
+Go to the [PPRCODE prediction server](http://yinlab.hzau.edu.cn/pprcode/) submission form directly and do the following:
   1. Paste your FASTA sequence in the upper text area.
   2. Enter your email address.
   3. Click the Submit button.
@@ -27,11 +27,8 @@ The registration of user is not required to the server. To submit your sequence,
  
 You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo.
 
-### _Q_: How long does a sequence take to process?
+### _Q_: How long does it take to finish a task?
 Less than three minutes.
-
-### _Q_: Is my submission job accessible to others?
-Before the submission, an identical job ID is generated to specify your sequence. The job is invisible without the job ID.
 
 ### _Q_: How many sequences can I submit in one submission?
 One sequence per request is recommended. You should always **refresh** the web page before creating another new submission.
@@ -39,10 +36,10 @@ One sequence per request is recommended. You should always **refresh** the web p
 ### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
 
-### _Q_: What does the prediction result mean to me?
+### _Q_: What does the prediction result mean?
 The result page contains a table like the following:
 
-> This is a demo sequence of PPR10 from *Zea maize*.
+> This is a demo sequence of PPR10 from *Zea mays*.
 
 
 Positions | Motif Sequences | PPR-code | RNA
@@ -68,7 +65,7 @@ Positions | Motif Sequences | PPR-code | RNA
 
 
 **Position**:
-> The boundary of every PPR motif refined on the bases of structural and functional research result.
+> The boundary of each PPR motif.
 
 **Motif Sequences**:
 > The detail of PPR motifs sequence.
@@ -77,13 +74,12 @@ Positions | Motif Sequences | PPR-code | RNA
 > Predicted PPR codes.
 
 **RNA**:
-> Predicted RNA bases which the PPR codes may conbined with.
+> Predicted RNA bases for the corresponding PPR motif. 
 
-### _Q_: Why does the PPR code and RNA prediction result of my sequence look like a mess?
-We identify the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. So it is recommended to make your own manual correction of the analysis result if there still exist problems. 
-The program cannot make everything as perfect as we wish to.
+### _Q_: Why does the prediction result of my sequence look like a mess?
+We identify the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
 
-### _Q_: What do the error pages mean?
+### _Q_: What do the error code mean?
 #### error code: 404
 The result is not found in database, which may be deleted, or the submission id contained in address is not complete.
 You need to resubmit your sequence, or check the right job id.
@@ -91,8 +87,8 @@ You need to resubmit your sequence, or check the right job id.
 #### error code: 500
 An internal error occurs in our program. This is often caused by the input sequence or email address. 
 **The server only accept sequences in FASTA format.**
-## Troubleshoot
 
+## Troubleshoot
 If there is any problem and advice with the website, you are welcome to contact us via [email](mailto:yaoyy@webmail.hzau.edu.cn).
 
 ## Contributers:
@@ -104,4 +100,3 @@ If there is any problem and advice with the website, you are welcome to contact 
 ## Cite information
 
 
-## 
