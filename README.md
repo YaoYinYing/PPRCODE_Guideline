@@ -79,7 +79,7 @@ Positions | Motif Sequences | PPR-code | RNA
 ### _Q_: Why does the prediction result of my sequence look like a mess?
 We identify the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
 
-### _Q_: What do the error code mean?
+### _Q_: What do the error codes mean?
 #### error code: 404
 The result is not found in database, which may be deleted, or the submission id contained in address is not complete.
 You need to resubmit your sequence, or check the right job id.
