@@ -43,7 +43,7 @@ The result page contains a table like the following:
 
 
 Motif Start | Motif End | Motif Sequence | Fifth amino acid | Last amino acid | PPR code | RNA base | Motif Length | ProSite Score
------|-----|-----|-----|-----|----|----|----|
+-----|-----|-----|-----|-----|----|----|----|----
 138 | 172 | ASALEMVVRALGREGQHDAVCALLDETPLPPGSRL | E | L | EL | ? | 35 | 5.031
 174 | 208 | VRAYTTVLHALSRAGRYERALELFAELRRQGVAPT | T | T | TT | A | 35 | 12.989
 209 | 244 | LVTYNVVLDVYGRMGRSWPRIVALLDEMRAAGVEPD | N | D | ND | U | 36 | 11.093
