@@ -63,21 +63,12 @@ Motif Start | Motif End | Motif Sequence | Fifth amino acid | Last amino acid | 
 702 | 736 | AVTYHTLVGGYSSLEMFSEAREVIGYMVQHGLKPM | H | M | HM | ? | 35 | 10.348
 737 | 771 | ELTYRRVVESYCRAKRFEEARGFLSEVSETDLDFD | R | D | RD | Y | 35 | 8.089
 
+and finally you will also get a predicted sequence like this:
+>?AU?UYYYCUYAYUUU?Y
 
-**Position**:
-> The boundary of each PPR motif.
-
-**Motif Sequences**:
-> The detail of PPR motifs sequence.
-
-**PPR-code**:
-> Predicted PPR codes.
-
-**RNA**:
-> Predicted RNA bases for the corresponding PPR motif. 
 
 ### _Q_: Why does the prediction result of my sequence look like a mess?
-We identify the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
+ProSite identifies the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
 
 ### _Q_: What do the error codes mean?
 #### error code: 404
