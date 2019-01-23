@@ -61,7 +61,7 @@ some other improvements
 
 
 ## v1.1 @ 2018.02.08
-### Describe: the first online version working with php normally.
+### Description: the first online version working with php normally.
 #### features:
 1. The program directly posts the sequences to ProSite one by one, get the result path, read and refine the matched positions, and return the RNA
 2. Email and website results for prediction
