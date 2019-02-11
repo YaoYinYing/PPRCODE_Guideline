@@ -3,8 +3,6 @@ A userguide to the PPRCODE server website.
 
 Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
-**NOTE: This page is still under contruction**
-
 ## FAQs
 
 ### _Q_: What is PPR and PPR code?
