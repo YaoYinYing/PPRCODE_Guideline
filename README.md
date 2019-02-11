@@ -42,29 +42,30 @@ The result page contains a table like the following:
 > This is a demo sequence of PPR10 from *Zea mays*.
 
 
-Motif Start | Motif End | Motif Sequence | Fifth amino acid | Last amino acid | PPR code | RNA base | Motif Length | ProSite Score
------|-----|-----|-----|-----|----|----|----|----
+Motif Start | Motif End | Motif Sequence | Fifth amino acid | Last amino acid | PPR Code | RNA base | Motif Length | ProSite Score
+ -----|-----|-----|-----|-----|----|----|----|----
 138 | 172 | ASALEMVVRALGREGQHDAVCALLDETPLPPGSRL | E | L | EL | ? | 35 | 5.031
-174 | 208 | VRAYTTVLHALSRAGRYERALELFAELRRQGVAPT | T | T | TT | A | 35 | 12.989
-209 | 244 | LVTYNVVLDVYGRMGRSWPRIVALLDEMRAAGVEPD | N | D | ND | U | 36 | 11.093
+174 | 208 | VRAYTTVLHALSRAGRYERALELFAELRRQGVAPT | T | T | TT | A>G | 35 | 12.989
+209 | 244 | LVTYNVVLDVYGRMGRSWPRIVALLDEMRAAGVEPD | N | D | ND | U>C>G | 36 | 11.093
 245 | 279 | GFTASTVIAACCRDGLVDEAVAFFEDLKARGHAPC | S | C | SC | ? | 35 | 11.411
-280 | 314 | VVTYNALLQVFGKAGNYTEALRVLGEMEQNGCQPD | N | D | ND | U | 35 | 12.737
-315 | 349 | AVTYNELAGTYARAGFFEEAARCLDTMASKGLLPN | N | N | NN | Y | 35 | 11.477
-350 | 384 | AFTYNTVMTAYGNVGKVDEALALFDQMKKTGFVPN | N | N | NN | Y | 35 | 14.096
-385 | 419 | VNTYNLVLGMLGKKSRFTVMLEMLGEMSRSGCTPN | N | N | NN | Y | 35 | 10.358
-420 | 454 | RVTWNTMLAVCGKRGMEDYVTRVLEGMRSCGVELS | N | S | NS | C | 35 | 9.887
-455 | 489 | RDTYNTLIAAYGRCGSRTNAFKMYNEMTSAGFTPC | N | C | NC | U | 35 | 11.674
-490 | 524 | ITTYNALLNVLSRQGDWSTAQSIVSKMRTKGFKPN | N | N | NN | Y | 35 | 11.542
+280 | 314 | VVTYNALLQVFGKAGNYTEALRVLGEMEQNGCQPD | N | D | ND | U>C>G | 35 | 12.737
+315 | 349 | AVTYNELAGTYARAGFFEEAARCLDTMASKGLLPN | N | N | NN | C>U | 35 | 11.477
+350 | 384 | AFTYNTVMTAYGNVGKVDEALALFDQMKKTGFVPN | N | N | NN | C>U | 35 | 14.096
+385 | 419 | VNTYNLVLGMLGKKSRFTVMLEMLGEMSRSGCTPN | N | N | NN | C>U | 35 | 10.358
+420 | 454 | RVTWNTMLAVCGKRGMEDYVTRVLEGMRSCGVELS | N | S | NS | C>U>A | 35 | 9.887
+455 | 489 | RDTYNTLIAAYGRCGSRTNAFKMYNEMTSAGFTPC | N | C | NC | U>C>>A | 35 | 11.674
+490 | 524 | ITTYNALLNVLSRQGDWSTAQSIVSKMRTKGFKPN | N | N | NN | C>U | 35 | 11.542
 525 | 560 | EQSYSLLLQCYAKGGNVAGIAAIENEVYGSGAVFPS | S | S | SS | A | 36 | 6.467
-561 | 595 | WVILRTLVIANFKCRRLDGMETAFQEVKARGYNPD | R | D | RD | Y | 35 | 6.445
-596 | 630 | LVIFNSMLSIYAKNGMYSKATEVFDSIKRSGLSPD | N | D | ND | U | 35 | 12.419
-631 | 666 | LITYNSLMDMYAKCSESWEAEKILNQLKCSQTMKPD | N | D | ND | U | 36 | 8.670
-667 | 701 | VVSYNTVINGFCKQGLVKEAQRVLSEMVADGMAPC | N | C | NC | U | 35 | 13.778
+561 | 595 | WVILRTLVIANFKCRRLDGMETAFQEVKARGYNPD | R | D | RD | - | 35 | 6.445
+596 | 630 | LVIFNSMLSIYAKNGMYSKATEVFDSIKRSGLSPD | N | D | ND | U>C>G | 35 | 12.419
+631 | 666 | LITYNSLMDMYAKCSESWEAEKILNQLKCSQTMKPD | N | D | ND | U>C>G | 36 | 8.67
+667 | 701 | VVSYNTVINGFCKQGLVKEAQRVLSEMVADGMAPC | N | C | NC | U>C>>A | 35 | 13.778
 702 | 736 | AVTYHTLVGGYSSLEMFSEAREVIGYMVQHGLKPM | H | M | HM | ? | 35 | 10.348
-737 | 771 | ELTYRRVVESYCRAKRFEEARGFLSEVSETDLDFD | R | D | RD | Y | 35 | 8.089
+737 | 771 | ELTYRRVVESYCRAKRFEEARGFLSEVSETDLDFD | R | D | RD | - | 35 | 8.089
+
 
 and finally you will also get a predicted sequence like this:
->?AU?UYYYCUYAYUUU?Y
+>(?) (A>G) (U>C>G) (?) (U>C>G) (C>U) (C>U) (C>U) (C>U>A) (U>C>>A) (C>U) (A) (-) (U>C>G) (U>C>G) (U>C>>A) (?) (-)
 
 
 ### _Q_: Why does the prediction result of my sequence look like a mess?
@@ -94,6 +95,17 @@ If there is any problem and advice with the website, you are welcome to contact 
 
 
 # **Changelog of ppr code server main program, version for release**
+## v1.6.2 @ 2019.02.11
+### features
+1. email for administrator for checking exceptions
+2. sequence uploading: save sequence as file to support long input
+
+
+## v 1.6.1 @ 2019.02.10
+### bug fix
+1. invalid chars in sequence and fasta name are removed
+
+
 ## v 1.6.0 @ 2019.01.20
 ###  bugfix
 1. exception for no hits. Result from ProSite is shown if no hit is found in a sequence.
