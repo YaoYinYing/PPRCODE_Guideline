@@ -1,4 +1,17 @@
-#**Changelog of ppr code server main program, version for release**
+
+
+# **Changelog of ppr code server main program, version for release**
+## v1.6.2 @ 2019.02.11
+### features
+1. email for administrator for checking exceptions
+2. sequence uploading: save sequence as file to support long input
+
+
+## v 1.6.1 @ 2019.02.10
+### bug fix
+1. invalid chars in sequence and fasta name are removed
+
+
 ## v 1.6.0 @ 2019.01.20
 ###  bugfix
 1. exception for no hits. Result from ProSite is shown if no hit is found in a sequence.
@@ -67,6 +80,4 @@ some other improvements
 2. Email and website results for prediction
 3. in result, the positions, motif sequences, PPR codes and matched RNA bases are printed line by line.
 4. database-depended in-processing and result display page 
-
-
 
