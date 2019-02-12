@@ -88,9 +88,9 @@ If there is any problem and advice with the website, you are welcome to contact 
 * Xiang Wang
 
 ## Cite information
+Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zhang Delin, Zou Tingting, Yin Ping*. Delineation of pentatricopeptide repeat codes for target RNA prediction, Nucleic Acids Research. 2019 February 11. doi: doi.org/10.1093/nar/gkz075
 
-
-
+----
 
 # **Changelog of ppr code server main program, version for release**
 ## v1.6.2 @ 2019.02.11
