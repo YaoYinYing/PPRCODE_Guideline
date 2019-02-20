@@ -98,6 +98,7 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ## v1.6.5 @ 2019.02.20
 ### features
 1. add citation and notes to results
+2. licensed by CC BY-NC-ND 4.0
 
 ## v1.6.2 @ 2019.02.11
 ### features
