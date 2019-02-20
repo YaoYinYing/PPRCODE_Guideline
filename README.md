@@ -95,6 +95,10 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ----
 
 # **Changelog of ppr code server main program, version for release**
+## v1.6.5 @ 2019.02.20
+### features
+1. add citation and notes to results
+
 ## v1.6.2 @ 2019.02.11
 ### features
 1. email for administrator for checking exceptions
