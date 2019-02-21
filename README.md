@@ -95,11 +95,17 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ----
 
 # **Changelog of ppr code server main program, version for release**
+## V1.6.6 @ 2019.02.21
+### features
+1. change license to CC BY-NC-SA 4.0
+
+### bug fix
+1. exception treatment: raise exception from wrong input. threads will be stopped and the page redirected to 500 error code 
+
 ## v1.6.5 @ 2019.02.20
 ### features
 1. add citation and notes to results
 2. licensed by CC BY-NC-ND 4.0
-
 ## v1.6.2 @ 2019.02.11
 ### features
 1. email for administrator for checking exceptions
