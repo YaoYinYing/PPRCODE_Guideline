@@ -25,7 +25,7 @@ Go to the [PPRCODE prediction server](http://yinlab.hzau.edu.cn/pprcode/) submis
   3. Click the Submit button.
  After the submission, the webpage will be automatically refreshed several times until the job is finished. 
  
-You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo.
+You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo, in which we have prepared a ZmPPR10 and an non-PPR for program testing.
 
 ### _Q_: How long does it take to finish a task?
 Less than three minutes.
@@ -95,6 +95,11 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ----
 
 # **Changelog of ppr code server main program, version for release**
+## V1.6.7 @ 2019.03.08
+### bug fix
+1. redirect to error_500 when data is failed to post by ajax. this is often caused by brower version or disabled javascript by users setting.
+>I will try post function with cgi.
+
 ## V1.6.6 @ 2019.02.21
 ### features
 1. change license to CC BY-NC-SA 4.0
