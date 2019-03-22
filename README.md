@@ -101,7 +101,7 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 2. repeated job submission caused by some unknown reason. 
 3. fail to send email and result page creating by syntax error in email address. email will be the last now.
 
-## V.16.8 @ 2019.03.16
+## V1.6.8 @ 2019.03.16
 ### bug fix
 1. connection error to ProSite with timeout limit.
 
