@@ -97,7 +97,7 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 # **Changelog of ppr code server main program, version for release**
 ## V1.6.9 @ 2019.03.22
 ### bug fix
-1. problems btw ajax and submit function of button, which occurs mostly in firefox.
+1. problem btw ajax and submit function of button, which occurs mostly in firefox.
 2. repeated job submission caused by some unknown reason. 
 3. fail to send email and result page creating by syntax error in email address. email will be the last now.
 
