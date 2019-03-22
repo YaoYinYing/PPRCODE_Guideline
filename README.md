@@ -99,7 +99,7 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ### bug fix
 1. problem btw ajax and submit function of button, which occurs mostly in firefox.
 2. repeated job submission caused by some unknown reason. 
-3. fail to send email and result page creating by syntax error in email address. email will be the last now.
+3. fail to send email and create result page caused by syntax error in email address. email will be the last now.
 
 ## V1.6.8 @ 2019.03.16
 ### bug fix
