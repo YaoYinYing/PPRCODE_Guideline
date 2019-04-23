@@ -95,9 +95,10 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ----
 
 # **Changelog of ppr code server main program, version for release**
-## V1.6.10 @2019.04-23
+## V1.6.10 @2019.04.23
 ### bug fix
-1. Network problem with ProSite.
+1. Network problem with ProSite. Retry the job 3 times at most.
+2. Inform user to resubmit when network exception still occurs with auto-retrying.
 
 
 ## V1.6.9 @ 2019.03.22
