@@ -95,6 +95,11 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ----
 
 # **Changelog of ppr code server main program, version for release**
+## V1.6.10 @2019.04-23
+### bug fix
+1. Network problem with ProSite.
+
+
 ## V1.6.9 @ 2019.03.22
 ### bug fix
 1. problem btw ajax and submit function of button, which occurs mostly in firefox.
