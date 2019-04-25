@@ -31,7 +31,7 @@ You may also click the link marked _**"Click here for a sample input sequence"**
 Less than three minutes for each sequence.
 
 ### _Q_: How many sequences can I submit in one submission?
-We can now process 30 sequences in parallel. However, submission of more than 50 is not recommended due to the instability of network environment.
+We can now process 100 sequences in parallel. However, submission of more than 50 is not recommended due to the instability of network environment.
 
 ### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
