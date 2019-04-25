@@ -14,7 +14,7 @@ PPR proteins are typically characterized by tandem degenerate repeats of a 35-am
 ### _Q_: What is PPRCODE prediction server?
 **PPRCODE** prediction server is aimed to provide services to the PPR community to facilitate PPR code and target RNA prediction. Once a PPR protein sequence is submitted, the server firstly identifies the PPR motifs using the PScan algorithm provided by Prosite, and then outputs the individual PPR motifs that is demarcated based on the PPR structure. PPR code is generally extracted from the 5th and 35th amino acids of each PPR motif, and the best matched RNA base for the PPR code is provided. As a result, the potential RNA target for the PPR sequence is available. 
 
-![PPRCODE Prediction Server: Interface](https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/snipaste20190212_194723.jpg)
+![PPRCODE Prediction Server: Interface](https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/snipaste20190425_102351.jpg)
 
 
 ### _Q_: How do I submit a sequence to the PPRCODE prediction server?
