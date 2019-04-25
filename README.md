@@ -28,10 +28,10 @@ Go to the [PPRCODE prediction server](http://yinlab.hzau.edu.cn/pprcode/) submis
 You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo, in which we have prepared a ZmPPR10 and an non-PPR for program testing.
 
 ### _Q_: How long does it take to finish a task?
-Less than three minutes.
+Less than three minutes for each sequence.
 
 ### _Q_: How many sequences can I submit in one submission?
-One sequence per request is recommended. You should always **refresh** the web page before creating another new submission.
+We can now process 30 sequences in parallel. However, submission of more than 50 is not recommended due to the instability of network environment.
 
 ### _Q_: How much time do I have before my job is removed in server?
 Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
