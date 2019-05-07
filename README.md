@@ -3,6 +3,8 @@ A userguide to the PPRCODE server website.
 
 Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
+<a href="https://doi.org/10.1093/nar/gkz075"><img src="https://zenodo.org/badge/158370760.svg" alt="DOI"></a>
+
 ## FAQs
 
 ### _Q_: What is PPR and PPR code?
@@ -91,6 +93,8 @@ If there is any problem and advice with the website, you are welcome to contact 
 
 ## Cite information
 Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zhang Delin, Zou Tingting, Yin Ping*. Delineation of pentatricopeptide repeat codes for target RNA prediction, Nucleic Acids Research. 2019 February 11. doi: doi.org/10.1093/nar/gkz075
+
+
 
 ----
 
