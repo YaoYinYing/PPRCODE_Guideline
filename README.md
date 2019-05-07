@@ -3,7 +3,6 @@ A userguide to the PPRCODE server website.
 
 Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
-<a href="https://doi.org/10.1093/nar/gkz075"><img src="https://zenodo.org/badge/158370760.svg" alt="DOI"></a>
 
 ## FAQs
 
