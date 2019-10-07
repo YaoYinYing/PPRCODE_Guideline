@@ -3,6 +3,9 @@ A userguide to the PPRCODE server website.
 
 Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
+### Very Important Note:
+Due to some uncontrollable policy reasons, the website is temporarily unreachable during this two months.  However we have prepared a [standalone version of this program](https://github.com/YaoYinYing/pypprcode_standalone),  by which you may process your PPR sequence in your own laptop with network support.
+
 
 ## FAQs
 
