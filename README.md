@@ -98,6 +98,10 @@ Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zha
 ----
 
 # **Changelog of ppr code server main program, version for release**
+## V1.6.11 @ 2020.03.30
+### features
+1. Add user map based on pyecharts
+
 ## V1.6.10 @ 2019.04.23
 ### bug fix
 1. Network problem with ProSite. Retry the job 3 times at most.
