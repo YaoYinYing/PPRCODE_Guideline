@@ -1,13 +1,14 @@
 
-A userguide to the PPRCODE server website.
+# A userguide to the PPRCODE server website.
 
 Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
-# NOTE
-This repo is somehow out-of-date
+## NOTE
+This repo is somehow out-of-date.
+
 Please switch to Colab version for online experience.
 
-[PPRCODE Colab](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
+<div><a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></div>
 
 ## FAQs
 
