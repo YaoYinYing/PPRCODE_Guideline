@@ -1,0 +1,21 @@
+rein
+fetch 5i9f
+dss
+remove ////HOH
+orient  chain A
+
+spectrum resi
+set cartoon_cylindrical_helices,
+
+turn z, 80
+turn z,190
+turn x, -30
+turn y,90
+turn z,-15
+
+show surface, chain A
+set surface_color, gray70
+set transparency,.7
+
+ray 500,500
+save Desktop/5f9i.png
