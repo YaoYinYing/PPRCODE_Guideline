@@ -4,7 +4,7 @@ dss
 remove ////HOH
 orient  chain A
 
-spectrum resi
+spectrum resi, blue_white_red, 5i9f and chain A 
 set cartoon_cylindrical_helices,
 
 turn z, 80
@@ -13,9 +13,23 @@ turn x, -30
 turn y,90
 turn z,-15
 
-show surface, chain A
+
+#show surface, chain A
 set surface_color, gray70
 set transparency,.7
 
-ray 500,500
-save Desktop/5f9i.png
+show sphere, /5i9f/B/F/U/N3
+set sphere_color, yellow, /5i9f/B/F/U/N3
+
+
+create lumi, /5i9f/B/F/U/N3
+show spheres, lumi
+
+set sphere_scale, 1.7,lumi
+set sphere_scale, .6, 5i9f
+set sphere_transparency, .3, lumi
+
+
+center /5i9f/B/F/U`1
+zoom 5i9f
+
