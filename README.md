@@ -1,19 +1,19 @@
 
-# A userguide to the PPRCODE server website.
+# A userguide to the PPRCODE project.
 
-Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
+Original Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
 ## NOTE
-This repo is somehow out-of-date.
+This original website is somehow out-of-date.
 
-Please switch to Colab version for online experience.
+Please switch to Colab release or docker release.
 
 <div><a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></div>
 
 ## Three ways to run PPRCODE
- 1. [WebServer](http://yinlab.hzau.edu.cn/pprcode/) **No longer maintained**
+ 1. [WebServer](http://yinlab.hzau.edu.cn/pprcode/): **No longer maintained**
  2. [Colab Reimplementation](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
- 3. Docker image 
+ 3. Docker image
 
 ## Run PPRCODE locally in docker
  1. Install docker daemon following the [officical getting-started page](https://www.docker.com/get-started/)
