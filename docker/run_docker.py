@@ -120,11 +120,12 @@ def main(argv):
         f'--bin_dir={FLAGS.bin_dir}',
         f'--profile_dir={FLAGS.profile_dir}',
         f'--plot_color_scheme={FLAGS.plot_color_scheme}',
+        f'--plot_item={",".join(FLAGS.plot_item)}',
 
     ])
 
-    for item in FLAGS.plot_item:
-        command_args.append(f'--plot_item={item}')
+    # for item in FLAGS.plot_item:
+    #     command_args.append(f'--plot_item={item}')
 
     print(command_args)
 
