@@ -10,6 +10,85 @@ Please switch to Colab version for online experience.
 
 <div><a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></div>
 
+## Three ways to run PPRCODE
+ 1. [WebServer](http://yinlab.hzau.edu.cn/pprcode/) **No longer maintained**
+ 2. [Colab Reimplementation](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
+ 3. Docker image 
+
+## Run PPRCODE locally in docker
+ 1. Install docker daemon following the [officical getting-started page](https://www.docker.com/get-started/)
+ 2. Clone this repo
+    ```shell
+    git clone https://github.com/YaoYinYing/PPRCODE_Guideline
+    ```
+ 3. Build PPRCODE docker image
+    ```shell
+    cd PPRCODE_Guideline
+    docker build -f docker/Dockerfile -t pprcode . 
+    # if you are a victim of GFW, please use the following instead:
+    docker build -f docker/Dockerfile_asia -t pprcode . --add-host raw.githubusercontent.com:<IP> # consult this IP to a public DNS provider 
+    ```
+ 4. Create Conda environment for run this docker image in an instance container
+    ```shell
+    conda create -y -n pprcode python pip
+    conda activate pprcode
+    cd <repo>/PPRCODE_Guideline
+    pip install -r docker/requirements.txt
+    ```
+ 5. Run `run_docker.py` to your data
+    ```shell
+    conda activate pprcode
+    mkdir test
+    
+    # fetch an example dataset 
+    wget -qnc http://yinlab.hzau.edu.cn/pprcode/ppr_example.fasta -P test
+    
+    # use PS_Scan as default program
+    python /repo/PPRCODE_Guideline/docker/run_docker.py --job_dir test/ --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
+    
+    # or use pprfinder provided by Small's Lab
+    python  /repo/PPRCODE_Guideline/docker/run_docker.py --job_dir test/ --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+    ```
+ 6. Advance options
+    ```shell
+     python   /repo/PPRCODE_Guideline/docker/run_docker.py --helpfull
+    
+    /repo/PPRCODE_Guideline/docker/run_docker.py:
+  --bin_dir: Where additional required binaries locate.
+    (default: '/app/bin/')
+  --[no]debug: debug messages
+    (default: 'false')
+  --docker_image_name: Name of the PPRCODE Docker image.
+    (default: 'pprcode')
+  --docker_user: UID:GID with which to run the Docker container. The output directories will be owned by this user:group. By default, this is the current user. Valid options are: uid or uid:gid, non-numeric values
+    are not recognised by Docker unless that user has been created within the container.
+    (default: '1005:50')
+  --[no]fix_gap: Fix gap in sequence scanning results. Turn it off so that the results will not be weird.
+    (default: 'false')
+  --job_dir: input directory of FASTA file(s) for scan.
+  --plot_color_scheme: <Accent|Accent_r|Blues|Blues_r|BrBG|BrBG_r|BuGn|BuGn_r|BuPu|BuPu_r|CMRmap|CMRmap_r|Dark2|Dark2_r|GnBu|GnBu_r|Greens|Greens_r|Greys|Greys_r|OrRd|OrRd_r|Oranges|Oranges_r|PRGn|PRGn_r|Paired|Pai
+    red_r|Pastel1|Pastel1_r|Pastel2|Pastel2_r|PiYG|PiYG_r|PuBu|PuBuGn|PuBuGn_r|PuBu_r|PuOr|PuOr_r|PuRd|PuRd_r|Purples|Purples_r|RdBu|RdBu_r|RdGy|RdGy_r|RdPu|RdPu_r|RdYlBu|RdYlBu_r|RdYlGn|RdYlGn_r|Reds|Reds_r|Set1|S
+    et1_r|Set2|Set2_r|Set3|Set3_r|Spectral|Spectral_r|Wistia|Wistia_r|YlGn|YlGnBu|YlGnBu_r|YlGn_r|YlOrBr|YlOrBr_r|YlOrRd|YlOrRd_r|afmhot|afmhot_r|autumn|autumn_r|binary|binary_r|bone|bone_r|brg|brg_r|bwr|bwr_r|civi
+    dis|cividis_r|cool|cool_r|coolwarm|coolwarm_r|copper|copper_r|cubehelix|cubehelix_r|flag|flag_r|gist_earth|gist_earth_r|gist_gray|gist_gray_r|gist_heat|gist_heat_r|gist_ncar|gist_ncar_r|gist_rainbow|gist_rainbo
+    w_r|gist_stern|gist_stern_r|gist_yarg|gist_yarg_r|gnuplot|gnuplot2|gnuplot2_r|gnuplot_r|gray|gray_r|hot|hot_r|hsv|hsv_r|inferno|inferno_r|jet|jet_r|magma|magma_r|nipy_spectral|nipy_spectral_r|ocean>: Color
+    scheme for plot
+    (default: 'RdBu')
+  --plot_item: plot PPRCODE results in what ways.
+    (default: 'bar,ppr,rna,type,edge')
+    (a comma separated list)
+  --profile_dir: Where additional required profiles locate.
+    (default: '/app/profiles/')
+  --program: <ps_scan|pprfinder>: Choose a proper algorithm to process your sequence. PPRCODE use PS_Scan(ps_scan) by default. However, you may use PPRfinder(pprfinder) from Small's Lab
+    (default: 'ps_scan')
+  --[no]report: Generate a human-friendly report file in xlsx format
+    (default: 'true')
+  --[no]run_benchmark: Fetch a benchmark dataset. **This could make your job running messy.**
+    (default: 'false')
+  --save_dir: Path to save run results.
+    (default: './results')
+    ```
+
+
 ## FAQs
 
 ### _Q_: What is PPR and PPR code?
