@@ -21,12 +21,20 @@ Please switch to Colab release or docker release.
     ```shell
     git clone https://github.com/YaoYinYing/PPRCODE_Guideline
     ```
- 3. Build PPRCODE docker image
+ 3. Create PPRCODE docker image
+ 
+    **from scratch:**
     ```shell
     cd PPRCODE_Guideline
     docker build -f docker/Dockerfile -t pprcode . 
-    # if you are a victim of GFW, please use the following instead:
+    ```
+    **_if you are a victim of GFW, please use the following instead:_**
+    ```shell
     docker build -f docker/Dockerfile_asia -t pprcode . --add-host raw.githubusercontent.com:<IP> # consult this IP to a public DNS provider 
+    ```
+    **or fetch a prebuild image**
+    ```shell
+    docker pull yaoyinying/pprcode:latest
     ```
  4. Create Conda environment for run this docker image in an instance container
     ```shell
