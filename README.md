@@ -4,19 +4,18 @@
 Original Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
 ## NOTE
-This original website is somehow out-of-date.
+This original website is Down.
 
-Please switch to Colab release or docker release.
-
-<div><a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></div>
+Please switch to Colab release or docker release or Biolib release.
 
 ## Three ways to run PPRCODE
- 1. [WebServer](http://yinlab.hzau.edu.cn/pprcode/): **No longer maintained**
+ 1. [WebServer from BioLib](https://biolib.com/YaoYinYing/pprcode/); 
+ **the [original webserver](http://yinlab.hzau.edu.cn/pprcode/) provided by [Yin Lab](http://yinlab.hzau.edu.cn/) is down and will be no longer maintained.**
  2. [Colab Reimplementation](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
  3. Docker image
 
 ## Run PPRCODE locally in docker
- 1. Install docker daemon following the [officical getting-started page](https://www.docker.com/get-started/)
+ 1. Install docker daemon following the [official getting-started page](https://www.docker.com/get-started/)
  2. Clone this repo
     ```shell
     git clone https://github.com/YaoYinYing/PPRCODE_Guideline
@@ -43,7 +42,7 @@ Please switch to Colab release or docker release.
     cd <repo>/PPRCODE_Guideline
     pip install -r docker/requirements.txt
     ```
- 5. Run `run_docker.py` to your data
+ 5. Run `run_docker.py` to an example data
     ```shell
     conda activate pprcode
     mkdir test
@@ -52,48 +51,100 @@ Please switch to Colab release or docker release.
     wget -qnc http://yinlab.hzau.edu.cn/pprcode/ppr_example.fasta -P test
     
     # use PS_Scan as default program
-    python /repo/PPRCODE_Guideline/docker/run_docker.py --job_dir test/ --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
+    python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
     
     # or use pprfinder provided by Small's Lab
-    python  /repo/PPRCODE_Guideline/docker/run_docker.py --job_dir test/ --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+    python  /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
     ```
  6. Advance options
     ```shell
-     python   /repo/PPRCODE_Guideline/docker/run_docker.py --helpfull
+    python  /repo/PPRCODE_Guideline/docker/run_docker.py --helpfull
+    Docker launch script for PPRCODE docker image.
+    flags:
     
-      /repo/PPRCODE_Guideline/docker/run_docker.py:
-    --bin_dir: Where additional required binaries locate.
-      (default: '/app/bin/')
-    --[no]debug: debug messages
-      (default: 'false')
-    --docker_image_name: Name of the PPRCODE Docker image.
-      (default: 'pprcode')
-    --docker_user: UID:GID with which to run the Docker container. The output directories will be owned by this user:group. By default, this is the current user. Valid options are: uid or uid:gid, non-numeric values
-      are not recognised by Docker unless that user has been created within the container.
-      (default: '1005:50')
-    --[no]fix_gap: Fix gap in sequence scanning results. Turn it off so that the results will not be weird.
-      (default: 'false')
-    --job_dir: input directory of FASTA file(s) for scan.
-    --plot_color_scheme: <Accent|Accent_r|Blues|Blues_r|BrBG|BrBG_r|BuGn|BuGn_r|BuPu|BuPu_r|CMRmap|CMRmap_r|Dark2|Dark2_r|GnBu|GnBu_r|Greens|Greens_r|Greys|Greys_r|OrRd|OrRd_r|Oranges|Oranges_r|PRGn|PRGn_r|Paired|Pai
-      red_r|Pastel1|Pastel1_r|Pastel2|Pastel2_r|PiYG|PiYG_r|PuBu|PuBuGn|PuBuGn_r|PuBu_r|PuOr|PuOr_r|PuRd|PuRd_r|Purples|Purples_r|RdBu|RdBu_r|RdGy|RdGy_r|RdPu|RdPu_r|RdYlBu|RdYlBu_r|RdYlGn|RdYlGn_r|Reds|Reds_r|Set1|S
-      et1_r|Set2|Set2_r|Set3|Set3_r|Spectral|Spectral_r|Wistia|Wistia_r|YlGn|YlGnBu|YlGnBu_r|YlGn_r|YlOrBr|YlOrBr_r|YlOrRd|YlOrRd_r|afmhot|afmhot_r|autumn|autumn_r|binary|binary_r|bone|bone_r|brg|brg_r|bwr|bwr_r|civi
-      dis|cividis_r|cool|cool_r|coolwarm|coolwarm_r|copper|copper_r|cubehelix|cubehelix_r|flag|flag_r|gist_earth|gist_earth_r|gist_gray|gist_gray_r|gist_heat|gist_heat_r|gist_ncar|gist_ncar_r|gist_rainbow|gist_rainbo
-      w_r|gist_stern|gist_stern_r|gist_yarg|gist_yarg_r|gnuplot|gnuplot2|gnuplot2_r|gnuplot_r|gray|gray_r|hot|hot_r|hsv|hsv_r|inferno|inferno_r|jet|jet_r|magma|magma_r|nipy_spectral|nipy_spectral_r|ocean>: Color
-      scheme for plot
-      (default: 'RdBu')
-    --plot_item: plot PPRCODE results in what ways.
-      (default: 'bar,ppr,rna,type,edge')
-      (a comma separated list)
-    --profile_dir: Where additional required profiles locate.
-      (default: '/app/profiles/')
-    --program: <ps_scan|pprfinder>: Choose a proper algorithm to process your sequence. PPRCODE use PS_Scan(ps_scan) by default. However, you may use PPRfinder(pprfinder) from Small's Lab
-      (default: 'ps_scan')
-    --[no]report: Generate a human-friendly report file in xlsx format
-      (default: 'true')
-    --[no]run_benchmark: Fetch a benchmark dataset. **This could make your job running messy.**
-      (default: 'false')
-    --save_dir: Path to save run results.
-      (default: './results')
+    /repo/PPRCODE_Guideline/docker/run_docker.py:
+      --bin_dir: Where additional required binaries locate.
+        (default: '/app/bin/')
+      --[no]debug: debug messages
+        (default: 'false')
+      --docker_image_name: Name of the PPRCODE Docker image.
+        (default: 'pprcode')
+      --docker_user: UID:GID with which to run the Docker container. The output directories will be owned by this user:group. By default, this is the current user. Valid options are: uid or uid:gid, non-numeric values
+        are not recognised by Docker unless that user has been created within the container.
+        (default: '1005:50')
+      --fasta: input FASTA file(s) for scan.
+      --[no]fix_gap: Fix gap in sequence scanning results. Turn it off so that the results will not be weird.
+        (default: 'false')
+      --plot_color_scheme: <Accent|Accent_r|Blues|Blues_r|BrBG|BrBG_r|BuGn|BuGn_r|BuPu|BuPu_r|CMRmap|CMRmap_r|Dark2|Dark2_r|GnBu|GnBu_r|Greens|Greens_r|Greys|Greys_r|OrRd|OrRd_r|Oranges|Oranges_r|PRGn|PRGn_r|Paired|Pai
+        red_r|Pastel1|Pastel1_r|Pastel2|Pastel2_r|PiYG|PiYG_r|PuBu|PuBuGn|PuBuGn_r|PuBu_r|PuOr|PuOr_r|PuRd|PuRd_r|Purples|Purples_r|RdBu|RdBu_r|RdGy|RdGy_r|RdPu|RdPu_r|RdYlBu|RdYlBu_r|RdYlGn|RdYlGn_r|Reds|Reds_r|Set1|S
+        et1_r|Set2|Set2_r|Set3|Set3_r|Spectral|Spectral_r|Wistia|Wistia_r|YlGn|YlGnBu|YlGnBu_r|YlGn_r|YlOrBr|YlOrBr_r|YlOrRd|YlOrRd_r|afmhot|afmhot_r|autumn|autumn_r|binary|binary_r|bone|bone_r|brg|brg_r|bwr|bwr_r|civi
+        dis|cividis_r|cool|cool_r|coolwarm|coolwarm_r|copper|copper_r|cubehelix|cubehelix_r|flag|flag_r|gist_earth|gist_earth_r|gist_gray|gist_gray_r|gist_heat|gist_heat_r|gist_ncar|gist_ncar_r|gist_rainbow|gist_rainbo
+        w_r|gist_stern|gist_stern_r|gist_yarg|gist_yarg_r|gnuplot|gnuplot2|gnuplot2_r|gnuplot_r|gray|gray_r|hot|hot_r|hsv|hsv_r|inferno|inferno_r|jet|jet_r|magma|magma_r|nipy_spectral|nipy_spectral_r|ocean>: Color
+        scheme for plot
+        (default: 'RdBu')
+      --plot_item: plot PPRCODE results in what ways.
+        (default: 'bar,ppr,rna,type,edge')
+        (a comma separated list)
+      --profile_dir: Where additional required profiles locate.
+        (default: '/app/profiles/')
+      --program: <ps_scan|pprfinder>: Choose a proper algorithm to process your sequence. PPRCODE use PS_Scan(ps_scan) by default. However, you may use PPRfinder(pprfinder) from Small's Lab
+        (default: 'ps_scan')
+      --[no]report: Generate a human-friendly report file in xlsx format
+        (default: 'true')
+      --[no]run_benchmark: Fetch a benchmark dataset. **This could make your job running messy.**
+        (default: 'false')
+      --save_dir: Path to save run results.
+        (default: './results')
+    
+    absl.app:
+      -?,--[no]help: show this help
+        (default: 'false')
+      --[no]helpfull: show full help
+        (default: 'false')
+      --[no]helpshort: show this help
+        (default: 'false')
+      --[no]helpxml: like --helpfull, but generates XML output
+        (default: 'false')
+      --[no]only_check_args: Set to true to validate args and exit.
+        (default: 'false')
+      --[no]pdb: Alias for --pdb_post_mortem.
+        (default: 'false')
+      --[no]pdb_post_mortem: Set to true to handle uncaught exceptions with PDB post mortem.
+        (default: 'false')
+      --profile_file: Dump profile information to a file (for python -m pstats). Implies --run_with_profiling.
+      --[no]run_with_pdb: Set to true for PDB debug mode
+        (default: 'false')
+      --[no]run_with_profiling: Set to true for profiling the script. Execution will be slower, and the output format might change over time.
+        (default: 'false')
+      --[no]use_cprofile_for_profiling: Use cProfile instead of the profile module for profiling. This has no effect unless --run_with_profiling is set.
+        (default: 'true')
+    
+    absl.logging:
+      --[no]alsologtostderr: also log to stderr?
+        (default: 'false')
+      --log_dir: directory to write logfiles into
+        (default: '')
+      --logger_levels: Specify log level of loggers. The format is a CSV list of `name:level`. Where `name` is the logger name used with `logging.getLogger()`, and `level` is a level name  (INFO, DEBUG, etc). e.g.
+        `myapp.foo:INFO,other.logger:DEBUG`
+        (default: '')
+      --[no]logtostderr: Should only log to stderr?
+        (default: 'false')
+      --[no]showprefixforinfo: If False, do not prepend prefix to info messages when it's logged to stderr, --verbosity is set to INFO level, and python logging is used.
+        (default: 'true')
+      --stderrthreshold: log messages at this level, or more severe, to stderr in addition to the logfile.  Possible values are 'debug', 'info', 'warning', 'error', and 'fatal'.  Obsoletes --alsologtostderr. Using
+        --alsologtostderr cancels the effect of this flag. Please also note that this flag is subject to --verbosity and requires logfile not be stderr.
+        (default: 'fatal')
+      -v,--verbosity: Logging verbosity level. Messages logged at this level or lower will be included. Set to 1 for debug logging. If the flag was not set or supplied, the value will be changed from the default of -1
+        (warning) to 0 (info) after flags are parsed.
+        (default: '-1')
+        (an integer)
+    
+    absl.flags:
+      --flagfile: Insert flag definitions from the given file into the command line.
+        (default: '')
+      --undefok: comma-separated list of flag names that it is okay to specify on the command line even if the program does not define a flag with that name.  IMPORTANT: flags in this list that have arguments MUST use
+        the --flag=value format.
+        (default: '')
     ```
 
 
@@ -113,22 +164,18 @@ PPR proteins are typically characterized by tandem degenerate repeats of a 35-am
 
 ### _Q_: How do I submit a sequence to the PPRCODE prediction server?
 
-Go to the [PPRCODE prediction server](http://yinlab.hzau.edu.cn/pprcode/) submission form directly and do the following:
+Go to the [PPRCODE prediction server in BioLib](https://biolib.com/YaoYinYing/pprcode/) submission form directly and do the following:
   1. Paste your FASTA sequence in the upper text area.
-  2. Enter your email address.
-  3. Click the Submit button.
- After the submission, the webpage will be automatically refreshed several times until the job is finished. 
+  2. Modify the options if needed.
+  3. Click the Run button.
+ After the submission, the webpage will be automatically run for several second until the job is finished. 
  
-You may also click the link marked _**"Click here for a sample input sequence"**_ above the sequence area to input a demo, in which we have prepared a ZmPPR10 and an non-PPR for program testing.
-
 ### _Q_: How long does it take to finish a task?
-Less than three minutes for each sequence.
+Less than three second for each sequence.
 
 ### _Q_: How many sequences can I submit in one submission?
-We can now process 30 sequences in parallel. However, submission of more than 100 is not recommended due to the instability of network environment.
+As many as you want.
 
-### _Q_: How much time do I have before my job is removed in server?
-Jobs may be removed **one week after they complete** to conserve disk space, and their result pages will also be unavailable.
 
 ### _Q_: What does the prediction result mean?
 The result page contains a table like the following:
@@ -164,15 +211,6 @@ and finally you will also get a predicted sequence like this:
 
 ### _Q_: Why does the prediction result of my sequence look like a mess?
 ProSite identifies the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
-
-### _Q_: What do the error codes mean?
-#### error code: 404
-The result is not found in database, which may be deleted, or the submission id contained in address is not complete.
-You need to resubmit your sequence, or check the right job id.
-
-#### error code: 500
-An internal error occurs in our program. This is often caused by the input sequence or email address. 
-**The server only accept sequences in FASTA format.**
 
 ## Troubleshoot
 If there is any problem and advice with the website, you are welcome to contact us via [email](mailto:yaoyy@webmail.hzau.edu.cn).
