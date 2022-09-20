@@ -14,7 +14,7 @@ import docker
 from docker import types
 
 flags.DEFINE_string(
-    'job_dir', None, 'input directory of FASTA file(s) for scan.')
+    'fasta', None, 'input FASTA file(s) for scan.')
 flags.DEFINE_enum(
     'program', 'ps_scan', ['ps_scan', 'pprfinder'],
     'Choose a proper algorithm to process your sequence. PPRCODE use PS_Scan(ps_scan) by default. However, you may use PPRfinder(pprfinder) from Small\'s Lab')
@@ -97,14 +97,14 @@ def main(argv):
     mounts = []
     command_args = []
 
-    job_dir = pathlib.Path(FLAGS.job_dir).resolve()
+    fasta = pathlib.Path(FLAGS.fasta).resolve()
     save_dir = pathlib.Path(FLAGS.save_dir).resolve()
 
     os.makedirs(save_dir, exist_ok=True)
 
     input_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'input')
-    mounts.append(types.Mount(input_target_path, str(job_dir), type='bind'))
-    command_args.append(f'--job_dir={input_target_path}')
+    mounts.append(types.Mount(input_target_path, str(fasta), type='bind'))
+    command_args.append(f'--fasta={input_target_path}')
 
     output_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'output')
     mounts.append(types.Mount(output_target_path, str(save_dir), type='bind'))
@@ -150,6 +150,6 @@ def main(argv):
 
 if __name__ == '__main__':
     flags.mark_flags_as_required([
-        'job_dir',
+        'fasta',
     ])
     app.run(main)

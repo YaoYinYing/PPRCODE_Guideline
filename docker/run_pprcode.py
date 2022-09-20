@@ -6,7 +6,6 @@ import time
 import traceback
 import pickle
 import re
-import argparse
 import subprocess
 import tempfile
 import pandas as pd
@@ -65,7 +64,7 @@ citations_banner = '''
 '''
 
 flags.DEFINE_string(
-    'job_dir', None, 'input directory of FASTA file(s) for scan.')
+    'fasta', None, 'input FASTA file(s) for scan.')
 flags.DEFINE_enum(
     'program', 'ps_scan', ['ps_scan', 'pprfinder'],
     'Choose a proper algorithm to process your sequence. PPRCODE use PS_Scan(ps_scan) by default. However, you may use PPRfinder(pprfinder) from Small\'s Lab')
@@ -489,11 +488,14 @@ def main(argv):
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
     logging.info(banner)
-    parser = argparse.ArgumentParser(description="Run PPRCODE.")
+
 
 
     # read args
-    JOBS_DIR = FLAGS.job_dir
+
+    FASTA_FP = pathlib.Path(FLAGS.fasta).resolve()
+    JOBS_DIR=FASTA_FP.parent
+
     program = FLAGS.program
     bin_dir = pathlib.Path(FLAGS.bin_dir).resolve()
     profile_dir = pathlib.Path(FLAGS.profile_dir).resolve()
@@ -562,44 +564,33 @@ def main(argv):
         plot_edge = False
         plot_type = False
         os.system(f"wget -qnc {BENCHMARK_DATA} -P {JOBS_DIR}")
+        FASTA_FP=str(JOBS_DIR)+'/'+(BENCHMARK_DATA.split('/')[-1])
 
-    if len(glob.glob(f'{JOBS_DIR}/*.fasta')) == 0:
-        raise FileNotFoundError("NO FASTA file is found!")
 
-    # @title Process the FASTAs
+    if debug: logging.info(FASTA_FP)
 
-    fastas = glob.glob(f'{JOBS_DIR}/*.fasta')
-    if debug: logging.info(fastas)
-
-    job_list = [s for f in fastas for s in SeqIO.parse(f, 'fasta')]
+    job_list = [s  for s in SeqIO.parse(FASTA_FP, 'fasta')]
     if debug: logging.info(len(job_list))
-    total = len(job_list)
 
-    for f in fastas:
+    for s in job_list:
+        if not os.path.exists(f'{RES_DIR_PICKLE}/{s.id}.pkl'):
+            logging.info(f'processing {str(s.id)} ...')
+            if program == 'PS_Scan':
+                ppr = ps_scan(FASTA_FP, s, debug=debug, RES_DIR_SCAN=RES_DIR_SCAN, profile_dir=profile_dir, bin_dir=bin_dir,
+                              fix_gap=fix_gap)
+            elif program == 'PPRfinder':
+                ppr = pprfinder(FASTA_FP, s, debug=debug, RES_DIR_FIND=RES_DIR_FIND, profile_dir=profile_dir, bin_dir=bin_dir)
+            else:
+                raise ValueError('What do you want me to do haiyaaaah?')
 
-        for s in SeqIO.parse(f, 'fasta'):
-            if not os.path.exists(f'{RES_DIR_PICKLE}/{s.id}.pkl'):
-                logging.info(f'processing {str(s.id)} ...')
-                if program == 'PS_Scan':
-                    ppr = ps_scan(f, s, debug=debug, RES_DIR_SCAN=RES_DIR_SCAN, profile_dir=profile_dir, bin_dir=bin_dir,
-                                  fix_gap=fix_gap)
-                elif program == 'PPRfinder':
-                    ppr = pprfinder(f, s, debug=debug, RES_DIR_FIND=RES_DIR_FIND, profile_dir=profile_dir, bin_dir=bin_dir)
-                else:
-                    raise ValueError('What do you want me to do haiyaaaah?')
-
-                pickle.dump(ppr, open(f'{RES_DIR_PICKLE}/{s.id}.pkl', 'wb'))
+            pickle.dump(ppr, open(f'{RES_DIR_PICKLE}/{s.id}.pkl', 'wb'))
 
     fixed_plot_width = 20
 
     cmap = cm.get_cmap(plot_color_scheme)
-
-    total = len(job_list)
-
     pkls_files = glob.glob(f'{RES_DIR_PICKLE}/*.pkl')
-    pkls = {pathlib.Path(x).stem: x for x in pkls_files}
-    fastas = glob.glob(f'{JOBS_DIR}/*.fasta')
-    job_list = {s.id: s for f in fastas for s in SeqIO.parse(f, 'fasta')}
+
+    job_list = {s.id: s  for s in SeqIO.parse(FASTA_FP, 'fasta')}
 
     scores = []
     for s in job_list.keys():
@@ -644,7 +635,7 @@ def main(argv):
         logging.info(f'generating report ...')
         generate_full_report(RES_DIR_REPORT=RES_DIR_REPORT, RES_DIR_PICKLE=RES_DIR_PICKLE, program=program, debug=debug)
 
-    zipped = f'PPRCODE_{time.strftime("%Y%m%d_%H%M%S", time.localtime())}.zip'
+    zipped = f'PPRCODE_results.zip'
     os.system(f"zip -FSr {RES_DIR}/{zipped} {RES_DIR} >/dev/null")
     logging.info(f'Done! Data zipped and stored as {zipped}')
     logging.info(citations_banner)
@@ -652,7 +643,7 @@ def main(argv):
 
 if __name__ == '__main__':
     flags.mark_flags_as_required([
-        'job_dir',
+        'fasta',
 
     ])
     app.run(main)
