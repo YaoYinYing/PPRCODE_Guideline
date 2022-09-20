@@ -1,0 +1,225 @@
+biolib_version: 2
+modules:
+    main:
+        image: 'dockerhub://yaoyinying/pprcode:latest'
+        command:  --save_dir /home/biolib/pprcode/save_dir
+        working_directory: /home/biolib/
+        input_files:
+            - COPY / /home/biolib/
+        output_files:
+            - COPY /home/biolib/pprcode/save_dir/PPRCODE_results.zip /
+        source_files:
+            - COPY / /home/biolib/pprcode/
+arguments:
+    -
+        default_value: /input.fa
+        description: 'Enter sequence(s) in FASTA format: '
+        key: '--fasta'
+        key_value_separator: '='
+        required: true
+        type: text-file
+
+    -   key: '--program' # required
+        description: 'Which program to run PPRCODE' # required
+        key_value_separator: '=' # optional, default is ' '
+        default_value: 'ps_scan' # optional, default is ''
+        type: dropdown # required
+        options:
+            'PS_Scan': 'ps_scan'
+            'PPRfinder': 'pprfinder'
+        required: false # optional, default is true
+
+    -   key: --plot_color_scheme # required
+        description: 'Color scheme for plot' # required
+        key_value_separator: '=' # optional, default is ' '
+        default_value: 'RdBu' # optional, default is ''
+        type: dropdown # required
+        options:
+            'Accent': 'Accent'
+            'Accent_r': 'Accent_r'
+            'Blues': 'Blues'
+            'Blues_r': 'Blues_r'
+            'BrBG': 'BrBG'
+            'BrBG_r': 'BrBG_r'
+            'BuGn': 'BuGn'
+            'BuGn_r': 'BuGn_r'
+            'BuPu': 'BuPu'
+            'BuPu_r': 'BuPu_r'
+            'CMRmap': 'CMRmap'
+            'CMRmap_r': 'CMRmap_r'
+            'Dark2': 'Dark2'
+            'Dark2_r': 'Dark2_r'
+            'GnBu': 'GnBu'
+            'GnBu_r': 'GnBu_r'
+            'Greens': 'Greens'
+            'Greens_r': 'Greens_r'
+            'Greys': 'Greys'
+            'Greys_r': 'Greys_r'
+            'OrRd': 'OrRd'
+            'OrRd_r': 'OrRd_r'
+            'Oranges': 'Oranges'
+            'Oranges_r': 'Oranges_r'
+            'PRGn': 'PRGn'
+            'PRGn_r': 'PRGn_r'
+            'Paired': 'Paired'
+            'Paired_r': 'Paired_r'
+            'Pastel1': 'Pastel1'
+            'Pastel1_r': 'Pastel1_r'
+            'Pastel2': 'Pastel2'
+            'Pastel2_r': 'Pastel2_r'
+            'PiYG': 'PiYG'
+            'PiYG_r': 'PiYG_r'
+            'PuBu': 'PuBu'
+            'PuBuGn': 'PuBuGn'
+            'PuBuGn_r': 'PuBuGn_r'
+            'PuBu_r': 'PuBu_r'
+            'PuOr': 'PuOr'
+            'PuOr_r': 'PuOr_r'
+            'PuRd': 'PuRd'
+            'PuRd_r': 'PuRd_r'
+            'Purples': 'Purples'
+            'Purples_r': 'Purples_r'
+            'RdBu': 'RdBu'
+            'RdBu_r': 'RdBu_r'
+            'RdGy': 'RdGy'
+            'RdGy_r': 'RdGy_r'
+            'RdPu': 'RdPu'
+            'RdPu_r': 'RdPu_r'
+            'RdYlBu': 'RdYlBu'
+            'RdYlBu_r': 'RdYlBu_r'
+            'RdYlGn': 'RdYlGn'
+            'RdYlGn_r': 'RdYlGn_r'
+            'Reds': 'Reds'
+            'Reds_r': 'Reds_r'
+            'Set1': 'Set1'
+            'Set1_r': 'Set1_r'
+            'Set2': 'Set2'
+            'Set2_r': 'Set2_r'
+            'Set3': 'Set3'
+            'Set3_r': 'Set3_r'
+            'Spectral': 'Spectral'
+            'Spectral_r': 'Spectral_r'
+            'Wistia': 'Wistia'
+            'Wistia_r': 'Wistia_r'
+            'YlGn': 'YlGn'
+            'YlGnBu': 'YlGnBu'
+            'YlGnBu_r': 'YlGnBu_r'
+            'YlGn_r': 'YlGn_r'
+            'YlOrBr': 'YlOrBr'
+            'YlOrBr_r': 'YlOrBr_r'
+            'YlOrRd': 'YlOrRd'
+            'YlOrRd_r': 'YlOrRd_r'
+            'afmhot': 'afmhot'
+            'afmhot_r': 'afmhot_r'
+            'autumn': 'autumn'
+            'autumn_r': 'autumn_r'
+            'binary': 'binary'
+            'binary_r': 'binary_r'
+            'bone': 'bone'
+            'bone_r': 'bone_r'
+            'brg': 'brg'
+            'brg_r': 'brg_r'
+            'bwr': 'bwr'
+            'bwr_r': 'bwr_r'
+            'cividis': 'cividis'
+            'cividis_r': 'cividis_r'
+            'cool': 'cool'
+            'cool_r': 'cool_r'
+            'coolwarm': 'coolwarm'
+            'coolwarm_r': 'coolwarm_r'
+            'copper': 'copper'
+            'copper_r': 'copper_r'
+            'cubehelix': 'cubehelix'
+            'cubehelix_r': 'cubehelix_r'
+            'flag': 'flag'
+            'flag_r': 'flag_r'
+            'gist_earth': 'gist_earth'
+            'gist_earth_r': 'gist_earth_r'
+            'gist_gray': 'gist_gray'
+            'gist_gray_r': 'gist_gray_r'
+            'gist_heat': 'gist_heat'
+            'gist_heat_r': 'gist_heat_r'
+            'gist_ncar': 'gist_ncar'
+            'gist_ncar_r': 'gist_ncar_r'
+            'gist_rainbow': 'gist_rainbow'
+            'gist_rainbow_r': 'gist_rainbow_r'
+            'gist_stern': 'gist_stern'
+            'gist_stern_r': 'gist_stern_r'
+            'gist_yarg': 'gist_yarg'
+            'gist_yarg_r': 'gist_yarg_r'
+            'gnuplot': 'gnuplot'
+            'gnuplot2': 'gnuplot2'
+            'gnuplot2_r': 'gnuplot2_r'
+            'gnuplot_r': 'gnuplot_r'
+            'gray': 'gray'
+            'gray_r': 'gray_r'
+            'hot': 'hot'
+            'hot_r': 'hot_r'
+            'hsv': 'hsv'
+            'hsv_r': 'hsv_r'
+            'inferno': 'inferno'
+            'inferno_r': 'inferno_r'
+            'jet': 'jet'
+            'jet_r': 'jet_r'
+            'magma': 'magma'
+            'magma_r': 'magma_r'
+            'nipy_spectral': 'nipy_spectral'
+            'nipy_spectral_r': 'nipy_spectral_r'
+            'ocean': 'ocean'
+        required: false # optional, default is true
+
+    -   key: --plot_item # required
+        description: 'plot PPRCODE results in what ways.' # required
+        key_value_separator: '=' # optional, default is ' '
+        default_value: 'bar,ppr,rna,type,edge' # optional, default is ''
+        type: multiselect # required
+        options:
+            'PPR motif': 'ppr'
+            'RNA bases': 'rna'
+            'motif score': 'score'
+            'motif edge': 'edge'
+            'motif type(pprfinder only)': 'type'
+            'colorbar': 'bar'
+        required: false # optional, default is true
+
+    -   key: --report # required
+        description: 'Generate a human-friendly report file in xlsx format' # required
+        key_value_separator: '=' # optional, default is ' '
+        default_value: 'true' # optional, default is ''
+        type: dropdown # required
+        options:
+            'On': 'true'
+            'Off': 'false'
+        required: false # optional, default is true
+
+    -   key: --fix_gap # required
+        description: 'Fix gap in sequence scanning results. Turn it off so that the results will not be weird.' # required
+        key_value_separator: '=' # optional, default is ' '
+        default_value: 'false' # optional, default is ''
+        type: dropdown # required
+        options:
+            'On': 'true'
+            'Off': 'false'
+        required: false # optional, default is true
+
+description_file: README.md
+
+citation:
+    entry_type: article
+    author: Yan, Junjie and Yao, Yinying and Hong, Sixing and Yang, Yan and Shen, Cuicui and Zhang, Qunxia and Zhang, Delin and Zou, Tingting and Yin, Ping
+    title: Delineation of pentatricopeptide repeat codes for target RNA prediction
+    journal: Nucleic Acids Research
+    volume: 47
+    number: 7
+    pages: 3728-3738
+    year: 2019
+    month: 02
+    abstract: Members of the pentatricopeptide repeat (PPR) protein family are sequence-specific RNA-binding proteins that play crucial roles in organelle RNA metabolism. Each PPR protein consists of a tandem array of PPR motifs, each of which aligns to one nucleotide of the RNA target. The di-residues in the PPR motif, which are referred to as the PPR codes, determine nucleotide specificity. Numerous PPR codes are distributed among the vast number of PPR motifs, but the correlation between PPR codes and RNA bases is poorly understood, which hinders target RNA prediction and functional investigation of PPR proteins. To address this issue, we developed a modular assembly method for high-throughput construction of designer PPRs, and by using this method, 62 designer PPR proteins containing various PPR codes were assembled. Then, the correlation between these PPR codes and RNA bases was systematically explored and delineated. Based on this correlation, the web server PPRCODE (http://yinlab.hzau.edu.cn/pprcode) was developed. Our study will not only serve as a platform for facilitating target RNA prediction and functional investigation of the large number of PPR family proteins but also provide an alternative strategy for the assembly of custom PPRs that can potentially be used for plant organelle RNA manipulation.
+    issn: 0305-1048
+    doi: 10.1093/nar/gkz075
+    url: https://doi.org/10.1093/nar/gkz075
+    eprint: https://academic.oup.com/nar/article-pdf/47/7/3728/28467620/gkz075.pdf
+
+
+
+
