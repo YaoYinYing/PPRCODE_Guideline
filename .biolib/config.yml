@@ -13,14 +13,14 @@ modules:
 arguments:
     -
         default_value: /input.fa
-        description: 'Enter sequence(s) in FASTA format: '
+        description: 'Enter/Upload your sequence(s) in FASTA format: '
         key: '--fasta'
         key_value_separator: '='
         required: true
         type: text-file
 
     -   key: '--program' # required
-        description: 'Which program to run PPRCODE' # required
+        description: 'Which program to run PPRCODE: ' # required
         key_value_separator: '=' # optional, default is ' '
         default_value: 'ps_scan' # optional, default is ''
         type: dropdown # required
@@ -30,7 +30,7 @@ arguments:
         required: false # optional, default is true
 
     -   key: --plot_color_scheme # required
-        description: 'Color scheme for plot' # required
+        description: 'Color scheme for plot:' # required
         key_value_separator: '=' # optional, default is ' '
         default_value: 'RdBu' # optional, default is ''
         type: dropdown # required
@@ -169,7 +169,7 @@ arguments:
         required: false # optional, default is true
 
     -   key: --plot_item # required
-        description: 'plot PPRCODE results in what ways.' # required
+        description: 'Plot PPRCODE results in what ways:' # required
         key_value_separator: '=' # optional, default is ' '
         default_value: 'bar,ppr,rna,type,edge' # optional, default is ''
         type: multiselect # required
@@ -183,7 +183,7 @@ arguments:
         required: false # optional, default is true
 
     -   key: --report # required
-        description: 'Generate a human-friendly report file in xlsx format' # required
+        description: 'Generate a human-friendly report file in xlsx format:' # required
         key_value_separator: '=' # optional, default is ' '
         default_value: 'true' # optional, default is ''
         type: dropdown # required
@@ -193,7 +193,7 @@ arguments:
         required: false # optional, default is true
 
     -   key: --fix_gap # required
-        description: 'Fix gap in sequence scanning results. Turn it off so that the results will not be weird.' # required
+        description: 'Fix gap in sequence scanning results while using PS_Scan. Turn it off by default so that the results will not be weird.' # required
         key_value_separator: '=' # optional, default is ' '
         default_value: 'false' # optional, default is ''
         type: dropdown # required

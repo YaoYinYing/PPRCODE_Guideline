@@ -1,6 +1,33 @@
 
-# A userguide to the PPRCODE project.
 
+<p align="center"><img width="250" height="250" margin-right="100%" src="./5i9f.png"></p>
+
+<p align="center">
+	<a href="https://doi.org/10.1093/nar/gkz075">
+    <img src="https://img.shields.io/badge/Paper-PPRCODE-blueviolet.svg" />
+	</a>
+	<a href="http://yinlab.hzau.edu.cn/pprcode/">
+    <img src="https://img.shields.io/badge/Made%20in-China-yellow.svg" />
+	</a>
+	<a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb">
+    <img src="https://img.shields.io/badge/Avaiable%20at-Google%20Colab-red.svg" />
+	</a>
+	<a href="https://biolib.com/YaoYinYing/pprcode/">
+    <img src="https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg" />
+	</a>
+	<a href="https://hub.docker.com/r/yaoyinying/pprcode">
+ 		<img src="https://img.shields.io/badge/Platform-docker-blue.svg" alt="platform">
+	</a>
+	<a href="https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg">
+ 		<img src="https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg" alt="systemrequirements">
+	</a>
+</p>
+
+
+
+# PPRCODE
+
+---
 Original Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
 ## NOTE
@@ -13,6 +40,7 @@ Please switch to:
  
 
 ## Three ways to run PPRCODE
+
  1. [WebServer from BioLib](https://biolib.com/YaoYinYing/pprcode/); 
  **the [original webserver](http://yinlab.hzau.edu.cn/pprcode/) provided by [Yin Lab](http://yinlab.hzau.edu.cn/) is down and will be no longer maintained.**
  2. [Colab Reimplementation](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
@@ -29,7 +57,7 @@ Please switch to:
     biolib run YaoYinYing/pprcode --help
  
     # fetch an example dataset 
-    wget -qnc http://yinlab.hzau.edu.cn/pprcode/ppr_example.fasta 
+    wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta 
     biolib run YaoYinYing/pprcode --fasta ppr_example.fasta
     ```
   **the run results will be located at $PWD/biolib_results**
@@ -71,7 +99,7 @@ Please switch to:
     mkdir test
     
     # fetch an example dataset 
-    wget -qnc http://yinlab.hzau.edu.cn/pprcode/ppr_example.fasta -P test
+    wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
     
     # use PS_Scan as default program
     python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
@@ -133,7 +161,7 @@ PPR proteins are typically characterized by tandem degenerate repeats of a 35-am
 ### _Q_: What is PPRCODE prediction server?
 **PPRCODE** prediction server is aimed to provide services to the PPR community to facilitate PPR code and target RNA prediction. Once a PPR protein sequence is submitted, the server firstly identifies the PPR motifs using the PScan algorithm provided by Prosite, and then outputs the individual PPR motifs that is demarcated based on the PPR structure. PPR code is generally extracted from the 5th and 35th amino acids of each PPR motif, and the best matched RNA base for the PPR code is provided. As a result, the potential RNA target for the PPR sequence is available. 
 
-![PPRCODE Prediction Server: Interface](https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/image/pprcode_biolib.png)
+![PPRCODE Prediction Server: Interface](image/pprcode_biolib.png)
 
 
 ### _Q_: How do I submit a sequence to the PPRCODE prediction server?
@@ -184,7 +212,7 @@ and finally you will also get a predicted sequence like this:
 
 
 ### _Q_: Why does the prediction result of my sequence look like a mess?
-ProSite identifies the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
+PS_Scan/PPRfinder identifies the sequence and motifs of a PPR protein by its similarity to the general P-type PPR. Sequences with low identity will hardly be predicted. In this circumstance, manual correction is strongly recommended. 
 
 ## Troubleshoot
 If there is any problem and advice with the website, you are welcome to contact us via [email](mailto:yaoyy@webmail.hzau.edu.cn).
