@@ -1,6 +1,6 @@
 
 
-<p align="center"><img width="250" height="250" margin-right="100%" src="./5i9f.png"></p>
+<p align="center"><img height="250" margin-right="100%" src="./image/5i9f_MN_97c.png"></p>
 
 <p align="center">
 	<a href="https://doi.org/10.1093/nar/gkz075">
@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/Made%20in-China-yellow.svg" />
 	</a>
 	<a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb">
-    <img src="https://img.shields.io/badge/Avaiable%20at-Google%20Colab-red.svg" />
+    <img src="https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg" />
 	</a>
 	<a href="https://biolib.com/YaoYinYing/pprcode/">
     <img src="https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg" />
