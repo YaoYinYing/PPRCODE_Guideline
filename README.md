@@ -1,6 +1,7 @@
 
 
-<p align="center"><img height="250" margin-right="100%" src="./image/5i9f_MN_97c.png"></p>
+<p align="center"><img src="./image/5i9f_MN_97c.png"></p>
+<p align="center"><i>Cover Image is presented with <b>MolecularNodes Project</b></i></p>
 
 <p align="center">
 	<a href="https://doi.org/10.1093/nar/gkz075">
