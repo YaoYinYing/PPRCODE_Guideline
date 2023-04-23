@@ -1,0 +1,36 @@
+name: PPRCODE_Guideline Workflow
+
+on:
+  push:
+    paths:
+      - 'docker/**' # Monitor the entire 'docker' directory
+      - 'scripts/**' # Monitor the entire 'scripts' directory
+      - 'README.md'  # Monitor the 'README.md' file
+    branches:
+      - main
+    
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Build Docker image
+      run: docker build -f docker/Dockerfile -t pprcode:latest -t yaoyinying/pprcode:$(date +"%Y-%m-%d") .
+      
+    - name: Push Docker image to Docker Hub
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: yaoyinying/pprcode:latest,yaoyinying/pprcode:$(date +"%Y-%m-%d")
+        username: YaoYinYing
+        password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
+        
+    - name: Install pybiolib package
+      run: pip3 install -U pybiolib
+      
+    - name: Build and push biolib application
+      run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }} biolib push https://biolib.com/YaoYinYing/pprcode/
