@@ -49,6 +49,6 @@ ENV PATH="/app/bin/ps_scan:$PATH"
 
 RUN echo $'#!/bin/bash\n\
 ldconfig\n\
-python /app/pprcode/docker/run_pprcode.py "$@"' > /app/run_pprcode.sh \
+python3 /app/pprcode/docker/run_pprcode.py "$@"' > /app/run_pprcode.sh \
   && chmod +x /app/run_pprcode.sh
 ENTRYPOINT ["/app/run_pprcode.sh"]
