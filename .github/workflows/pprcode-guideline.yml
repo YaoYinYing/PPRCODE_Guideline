@@ -55,21 +55,21 @@ jobs:
         docker push yaoyinying/pprcode:${{ env.DATE }}
         docker push yaoyinying/pprcode:latest
 
-    - name: Update Readme file for ci actions
-      run: sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.ci.md
+    - name: Update Readme file for CI actions
+      run: |
+        sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.ci.md
         
-    - name: Docker Hub Description
+    - name: Refresh Docker Hub Description
       uses: peter-evans/dockerhub-description@v3
       with:
         username: yaoyinying
         password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
-        repository: $GITHUB_REPOSITORY
-        readme-filepath: ./README.ci.md
-        short-description: ${{ github.event.repository.description }}
+        repository: YaoYinYing/PPRCODE_Guideline
+        readme-filepath: ./README.md
+        enable-url-completion: true
         
     - name: Install pybiolib package
       run: pip3 install -U pybiolib
-
       
     - name: Build and push biolib application
       run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }}  biolib push YaoYinYing/pprcode/
