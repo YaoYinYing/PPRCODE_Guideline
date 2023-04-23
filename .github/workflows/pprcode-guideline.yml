@@ -7,7 +7,7 @@ on:
       - 'scripts/**' # Monitor the entire 'scripts' directory
       - 'README.md'  # Monitor the 'README.md' file
     branches:
-      - main
+      - master
     
 jobs:
   build-and-push:
