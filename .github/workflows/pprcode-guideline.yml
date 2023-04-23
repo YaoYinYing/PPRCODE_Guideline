@@ -7,6 +7,7 @@ on:
       - 'scripts/**' # Monitor the entire 'scripts' directory
       - 'README.md'  # Monitor the 'README.md' file
       - '.github/**'
+
     branches:
       - master
     
@@ -53,22 +54,25 @@ jobs:
         cd ${{ env.REPO }}
         docker push yaoyinying/pprcode:${{ env.DATE }}
         docker push yaoyinying/pprcode:latest
+
+    - name: Update Readme file for ci actions
+      run: sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.ci.md
         
-    - name: Update Docker Hub README.md
-      run: |
-        cd ${{ env.REPO }}
-        docker cp README.md yaoyinying/pprcode:/README.md
-        docker commit yaoyinying/pprcode yaoyinying/pprcode
-        docker push yaoyinying/pprcode
+    - name: Docker Hub Description
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: yaoyinying
+        password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
+        repository: $GITHUB_REPOSITORY
+        readme-filepath: ./README.ci.md
+        short-description: ${{ github.event.repository.description }}
         
     - name: Install pybiolib package
       run: pip3 install -U pybiolib
 
-    - name: Update Readme file to Biolib
-      run: sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.biolib.md
       
     - name: Build and push biolib application
-      run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }} biolib push https://biolib.com/YaoYinYing/pprcode/
+      run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }}  biolib push YaoYinYing/pprcode/
 
-    - name: Delete BioLib Readme
-      run: rm -f README.biolib.md
+    - name: Delete temp Readme
+      run: rm -f README.ci.md
