@@ -19,10 +19,14 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Set environment variable with current date
-      run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      run: |
+        echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        echo "DATE: ${{ env.DATE }}"
     
     - name: Set environment variable with current repo dir
-      run: echo "REPO=$PWD" >> $GITHUB_ENV
+      run: |
+        echo "REPO=$PWD" >> $GITHUB_ENV
+        echo "REPO: ${{ env.REPO }}"
       
     - name: Build Docker image
       run: docker build -f docker/Dockerfile -t pprcode .
@@ -37,14 +41,15 @@ jobs:
 
     - name: Create Testing and Run it
       run: |
-        conda create -y -n pprcode python pip
-        conda activate pprcode
+        python -m venv pprcode_test
+        source pprcode_test/bin/activate
         pip install -r docker/requirements.txt
         mkdir ~/ppr_test && cd ~/ppr_test
         mkdir test && wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
         python ${{ env.REPO }}/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-1 --plot_item=bar,score,edge,ppr,rna
         python ${{ env.REPO }}/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
-        conda deactivate
+        cd ${{ env.REPO }}
+        deactivate && rm -r pprcode_test
         
     - name: Push Docker image
       run: |
