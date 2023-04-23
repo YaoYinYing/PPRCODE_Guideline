@@ -73,7 +73,7 @@ jobs:
       run: pip3 install -U pybiolib
       
     - name: Build and push biolib application
-      run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }}  biolib push YaoYinYing/pprcode/
+      run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }}  biolib push YaoYinYing/pprcode
 
     - name: Delete temp Readme
       run: rm -f README.ci.md
