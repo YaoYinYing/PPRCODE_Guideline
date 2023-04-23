@@ -46,7 +46,7 @@ ARG PS_SCAN_URL='https://ftp.expasy.org/databases/prosite/ps_scan/ps_scan_linux_
 ARG PPRFINDER_BUILD='https://raw.githubusercontent.com/YaoYinYing/PPRfinder/master/out/production/PPRfinder/PPRfinder.jar'
 ARG HMM_PROFILE_URL='https://raw.githubusercontent.com/YaoYinYing/PPRfinder/master/data/'
 
-
+# setup psscan
 RUN wget -qnc ${PS_SCAN_URL} -P /tmp \
     && mkdir -p /app/bin/ \
     && cd /app/bin/ \
