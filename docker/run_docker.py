@@ -102,9 +102,11 @@ def main(argv):
     fasta = pathlib.Path(FLAGS.fasta).resolve()
     save_dir = pathlib.Path(FLAGS.save_dir).resolve()
 
-    os.makedirs(save_dir, exist_ok=True)
 
-    input_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'input')
+    os.makedirs(save_dir, exist_ok=True)
+    os.makedirs(os.path.join(_ROOT_MOUNT_DIRECTORY, 'input'), exist_ok=True)
+
+    input_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'input', fasta.name)
     mounts.append(types.Mount(input_target_path, str(fasta), type='bind'))
     command_args.append(f'--fasta={input_target_path}')
 
