@@ -6,6 +6,7 @@ on:
       - 'docker/**' # Monitor the entire 'docker' directory
       - 'scripts/**' # Monitor the entire 'scripts' directory
       - 'README.md'  # Monitor the 'README.md' file
+      - '.github/**'
     branches:
       - master
     
