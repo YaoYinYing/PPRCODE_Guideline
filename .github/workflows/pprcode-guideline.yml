@@ -57,7 +57,7 @@ jobs:
 
     - name: Update Readme file for CI actions
       run: |
-        sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.ci.md
+        sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g' README.md >README.ci.md
         cat README.ci.md
 
     - name: Refresh Docker Hub Description
