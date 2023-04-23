@@ -4,12 +4,12 @@
 _Cover Image is presented with [**MolecularNodes Project**](https://github.com/BradyAJohnston/MolecularNodes)_
 
 ---
-[![Paper-PPRCODE](https://img.shields.io/badge/Paper-PPRCODE-blueviolet.svg)](https://doi.org/10.1093/nar/gkz075)
-[![Made in China](https://img.shields.io/badge/Made%20in-China-yellow.svg)](http://yinlab.hzau.edu.cn/pprcode/)
-[![Available at Google Colab](https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg)](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
-[![Available at BioLib](https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg)](https://biolib.com/YaoYinYing/pprcode/)
-[![Platform: docker](https://img.shields.io/badge/Platform-docker-blue.svg)](https://hub.docker.com/r/yaoyinying/pprcode)
-[![Build in x86_64](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)
+[![Paper-PPRCODE]('https://img.shields.io/badge/Paper-PPRCODE-blueviolet.svg')](https://doi.org/10.1093/nar/gkz075)
+[![Made in China]('https://img.shields.io/badge/Made%20in-China-yellow.svg')](http://yinlab.hzau.edu.cn/pprcode/)
+[![Available at Google Colab]('https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg')](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
+[![Available at BioLib]('https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg')](https://biolib.com/YaoYinYing/pprcode/)
+[![Platform: docker]('https://img.shields.io/badge/Platform-docker-blue.svg')](https://hub.docker.com/r/yaoyinying/pprcode)
+[![Build in x86_64]('https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg')](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)
 ----
 
 
