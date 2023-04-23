@@ -69,7 +69,7 @@ FLAGS = flags.FLAGS
 try:
     _ROOT_MOUNT_DIRECTORY = f'/home/{os.getlogin()}'
 except:
-    _ROOT_MOUNT_DIRECTORY = '.'
+    _ROOT_MOUNT_DIRECTORY = pathlib.Path('.').resolve()
     os.makedirs(_ROOT_MOUNT_DIRECTORY, exist_ok=True)
 
 def _create_mount(mount_name: str, path: str) -> Tuple[types.Mount, str]:
