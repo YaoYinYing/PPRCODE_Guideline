@@ -202,7 +202,7 @@ arguments:
             'Off': 'false'
         required: false # optional, default is true
 
-description_file: README.md
+description_file: README.biolib.md
 
 citation:
     entry_type: article

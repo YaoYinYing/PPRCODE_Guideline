@@ -29,7 +29,7 @@ jobs:
         echo "REPO: ${{ env.REPO }}"
       
     - name: Build Docker image
-      run: docker build -f docker/Dockerfile_alpine -t pprcode .
+      run: docker build -f docker/Dockerfile -t pprcode .
 
     - name: Tag Docker image with date and latest
       run: |
@@ -60,11 +60,15 @@ jobs:
         docker cp README.md yaoyinying/pprcode:/README.md
         docker commit yaoyinying/pprcode yaoyinying/pprcode
         docker push yaoyinying/pprcode
-         
-
         
-#     - name: Install pybiolib package
-#       run: pip3 install -U pybiolib
+    - name: Install pybiolib package
+      run: pip3 install -U pybiolib
+
+    - name: Update Readme file to Biolib
+      run: sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.biolib.md
       
-#     - name: Build and push biolib application
-#       run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }} biolib push https://biolib.com/YaoYinYing/pprcode/
+    - name: Build and push biolib application
+      run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }} biolib push https://biolib.com/YaoYinYing/pprcode/
+
+    - name: Delete BioLib Readme
+      run: rm -f README.biolib.md

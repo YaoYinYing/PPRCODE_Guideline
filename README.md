@@ -83,10 +83,6 @@ Please switch to:
     cd PPRCODE_Guideline
     docker build -f docker/Dockerfile -t pprcode . 
     ```
-    **noted that _if you are a victim of GFW, please use the following instead:_**
-    ```shell
-    docker build -f docker/Dockerfile_asia -t pprcode . --add-host raw.githubusercontent.com:<IP> # consult this IP to a public DNS provider 
-    ```
  4. Create Conda environment for run this docker image in an instance container
     ```shell
     conda create -y -n pprcode python pip
