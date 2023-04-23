@@ -104,11 +104,11 @@ def main(argv):
 
 
     os.makedirs(save_dir, exist_ok=True)
-    os.makedirs(os.path.join(_ROOT_MOUNT_DIRECTORY, 'input'), exist_ok=True)
 
-    input_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'input', fasta.name)
-    mounts.append(types.Mount(input_target_path, str(fasta), type='bind'))
-    command_args.append(f'--fasta={input_target_path}')
+
+    mount, target_path = _create_mount(f'fasta', str(fasta))
+    mounts.append(mount)
+    command_args.append(f'--fasta={target_path}')
 
     output_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'output')
     mounts.append(types.Mount(output_target_path, str(save_dir), type='bind'))
