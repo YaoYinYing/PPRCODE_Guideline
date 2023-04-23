@@ -106,7 +106,7 @@ def main(argv):
     os.makedirs(save_dir, exist_ok=True)
 
 
-    mount, target_path = _create_mount(f'fasta', str(fasta))
+    mount, target_path = _create_mount('input', str(fasta))
     mounts.append(mount)
     command_args.append(f'--fasta={target_path}')
 

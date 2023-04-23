@@ -44,12 +44,9 @@ jobs:
         python -m venv pprcode_test
         source pprcode_test/bin/activate
         pip install -r docker/requirements.txt
-        mkdir ~/ppr_test && cd ~/ppr_test
-        mkdir test && wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
-        python ${{ env.REPO }}/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-1 --plot_item=bar,score,edge,ppr,rna
-        python ${{ env.REPO }}/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
-        cd ${{ env.REPO }}
-        deactivate && rm -r pprcode_test
+        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-psscan --plot_item=bar,score,edge,ppr,rna
+        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+        deactivate 
         
     - name: Push Docker image
       run: |
@@ -59,6 +56,7 @@ jobs:
         
     - name: Update Docker Hub README.md
       run: |
+        cd ${{ env.REPO }}
         docker cp README.md yaoyinying/pprcode:/README.md
         docker commit yaoyinying/pprcode yaoyinying/pprcode
         docker push yaoyinying/pprcode
