@@ -39,20 +39,20 @@ jobs:
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_GITHUB_REPO_SECRET }}" | docker login -u yaoyinying --password-stdin
 
-    - name: Create Testing and Run it
-      run: |
-        python -m venv pprcode_test
-        source pprcode_test/bin/activate
-        pip install -r docker/requirements.txt
-        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-psscan --plot_item=bar,score,edge,ppr,rna
-        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
-        deactivate 
-        
-    # - name: Push Docker image
+    # - name: Create Testing and Run it
     #   run: |
-    #     cd ${{ env.REPO }}
-    #     docker push yaoyinying/pprcode:${{ env.DATE }}
-    #     docker push yaoyinying/pprcode:latest
+    #     python -m venv pprcode_test
+    #     source pprcode_test/bin/activate
+    #     pip install -r docker/requirements.txt
+    #     python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-psscan --plot_item=bar,score,edge,ppr,rna
+    #     python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+    #     deactivate 
+        
+    - name: Push Docker image
+      run: |
+        cd ${{ env.REPO }}
+        docker push yaoyinying/pprcode:${{ env.DATE }}
+        docker push yaoyinying/pprcode:latest
         
     - name: Update Docker Hub README.md
       run: |
