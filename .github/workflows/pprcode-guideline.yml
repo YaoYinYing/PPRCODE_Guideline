@@ -55,10 +55,10 @@ jobs:
         docker push yaoyinying/pprcode:${{ env.DATE }}
         docker push yaoyinying/pprcode:latest
 
-    # - name: Update Readme file for CI actions
-    #   run: |
-    #     sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g' README.md >README.ci.md
-    #     cat README.ci.md
+    - name: Update Readme file for CI actions
+      run: |
+        awk '{if ($0 !~ "https://img.shields.io"){print }}' README.md >README.ci.md
+        cat README.ci.md
 
     - name: Refresh Docker Hub Description
       uses: peter-evans/dockerhub-description@v3
@@ -76,4 +76,4 @@ jobs:
       run: BIOLIB_TOKEN=${{ secrets.BIOLIB_TOKEN }}  biolib push YaoYinYing/pprcode
 
     - name: Delete temp Readme
-      run: rm -f README.md
+      run: rm -f README.ci.md
