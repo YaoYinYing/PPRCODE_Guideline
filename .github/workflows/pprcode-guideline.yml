@@ -20,6 +20,9 @@ jobs:
       
     - name: Set environment variable with current date
       run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+    
+    - name: Set environment variable with current repo dir
+      run: echo "REPO=$PWD" >> $GITHUB_ENV
       
     - name: Build Docker image
       run: docker build -f docker/Dockerfile -t pprcode .
@@ -30,10 +33,22 @@ jobs:
         docker tag pprcode yaoyinying/pprcode:latest
 
     - name: Log in to Docker Hub
-      run: docker login -u YaoYinYing -p ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
+    - name: Create Testing and Run it
+      run: |
+        conda create -y -n pprcode python pip
+        conda activate pprcode
+        pip install -r docker/requirements.txt
+        mkdir ~/ppr_test && cd ~/ppr_test
+        mkdir test && wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
+        python ${{ env.REPO }}/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-1 --plot_item=bar,score,edge,ppr,rna
+        python ${{ env.REPO }}/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+        conda deactivate
+        
     - name: Push Docker image
       run: |
+        cd ${{ env.REPO }}
         docker push yaoyinying/pprcode:${{ env.DATE }}
         docker push yaoyinying/pprcode:latest
         
@@ -42,6 +57,7 @@ jobs:
         docker cp README.md yaoyinying/pprcode:/README.md
         docker commit yaoyinying/pprcode yaoyinying/pprcode
         docker push yaoyinying/pprcode
+         
 
         
 #     - name: Install pybiolib package
