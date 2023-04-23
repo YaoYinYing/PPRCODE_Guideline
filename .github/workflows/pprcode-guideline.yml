@@ -48,11 +48,11 @@ jobs:
         python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
         deactivate 
         
-    - name: Push Docker image
-      run: |
-        cd ${{ env.REPO }}
-        docker push yaoyinying/pprcode:${{ env.DATE }}
-        docker push yaoyinying/pprcode:latest
+    # - name: Push Docker image
+    #   run: |
+    #     cd ${{ env.REPO }}
+    #     docker push yaoyinying/pprcode:${{ env.DATE }}
+    #     docker push yaoyinying/pprcode:latest
         
     - name: Update Docker Hub README.md
       run: |

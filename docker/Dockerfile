@@ -5,40 +5,22 @@ ARG JDK_VER=openjdk-17-jdk-headless
 # Use bash to support string substitution.
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update -qy  \
-    && apt-get install ca-certificates -qy \
-    && apt-get install -qy ${JDK_VER}
-
-RUN apt-get install -y zip
-
-
-RUN apt-get update -q && DEBIAN_FRONTEND=noninteractive apt-get install -qy \
-        hmmer \
-        perl \
-        wget \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN wget -q -P /tmp \
-  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
-    && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
-
-ENV PATH="/opt/conda/bin:$PATH"
-RUN conda update -qy conda \
-    && conda install -qy -c conda-forge  pandas pip
-
-#RUN conda install -qy -c plotly plotly-orca
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -qy  \
+    && apt-get install -qy ca-certificates \
+    && apt-get install -qy ${JDK_VER} \
+    && apt-get install -qy python3 python3-dev zip hmmer perl wget 
 
 COPY . /app/pprcode
 
 # Install pip packages.
-RUN pip3 -q install --upgrade pip \
+RUN python3 -m ensurepip \
+    && pip3 -q install --upgrade pip \
+    && pip3 -q install pandas \
     && pip3 -q install biopython \
     && pip3 -q install matplotlib \
     && pip3 -q install dna_features_viewer \
-    && pip3 -q install xlsxwriter
-
-RUN pip3 install -q absl-py==0.13.0
+    && pip3 -q install xlsxwriter \
+    && pip3 -q install absl-py==0.13.0
 
 # PS_scan setting/ PPRfinder setting
 ARG PROSITE_URL='https://ftp.expasy.org/databases/prosite/'
