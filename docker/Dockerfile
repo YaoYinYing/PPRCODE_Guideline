@@ -13,7 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -qy  \
 COPY . /app/pprcode
 
 # Install pip packages.
-RUN python3 -m ensurepip \
+RUN python -m pip install --upgrade pip \
     && pip3 -q install --upgrade pip \
     && pip3 -q install pandas \
     && pip3 -q install biopython \
