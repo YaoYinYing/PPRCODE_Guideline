@@ -33,7 +33,7 @@ jobs:
         docker tag pprcode yaoyinying/pprcode:latest
 
     - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      run: echo "${{ secrets.DOCKER_GITHUB_REPO_SECRET }}" | docker login -u yaoyinying --password-stdin
 
     - name: Create Testing and Run it
       run: |
