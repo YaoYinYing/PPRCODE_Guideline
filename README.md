@@ -1,34 +1,20 @@
 
 
-<p align="center"><img src="./image/5i9f_MN_97c.png"></p>
-<p align="center"><i>Cover Image is presented with <b>MolecularNodes Project</b></i></p>
+![PPRCODE](./image/5i9f_MN_97c.png)
+_Cover Image is presented with [**MolecularNodes Project**](https://github.com/BradyAJohnston/MolecularNodes)_
 
-<p align="center">
-	<a href="https://doi.org/10.1093/nar/gkz075">
-    <img src="https://img.shields.io/badge/Paper-PPRCODE-blueviolet.svg" />
-	</a>
-	<a href="http://yinlab.hzau.edu.cn/pprcode/">
-    <img src="https://img.shields.io/badge/Made%20in-China-yellow.svg" />
-	</a>
-	<a href="https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb">
-    <img src="https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg" />
-	</a>
-	<a href="https://biolib.com/YaoYinYing/pprcode/">
-    <img src="https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg" />
-	</a>
-	<a href="https://hub.docker.com/r/yaoyinying/pprcode">
- 		<img src="https://img.shields.io/badge/Platform-docker-blue.svg" alt="platform">
-	</a>
-	<a href="https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg">
- 		<img src="https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg" alt="systemrequirements">
-	</a>
-</p>
-
+---
+[![Paper-PPRCODE](https://img.shields.io/badge/Paper-PPRCODE-blueviolet.svg)](https://doi.org/10.1093/nar/gkz075)
+[![Made in China](https://img.shields.io/badge/Made%20in-China-yellow.svg)](http://yinlab.hzau.edu.cn/pprcode/)
+[![Available at Google Colab](https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg)](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
+[![Available at BioLib](https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg)](https://biolib.com/YaoYinYing/pprcode/)
+[![Platform: docker](https://img.shields.io/badge/Platform-docker-blue.svg)](https://hub.docker.com/r/yaoyinying/pprcode)
+[![Build in x86_64](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)
+----
 
 
 # PPRCODE
 
----
 Original Project site: [PPR Code Prediction Server - From PPR to RNA](http://yinlab.hzau.edu.cn/pprcode/)
 
 ## NOTE
@@ -74,7 +60,7 @@ Please switch to:
     ```
  3. PPRCODE docker image.
 
-    **fetch a prebuild image**
+    **fetch the latest image**
     ```shell
     docker pull yaoyinying/pprcode:latest
     ```
@@ -215,10 +201,10 @@ PS_Scan/PPRfinder identifies the sequence and motifs of a PPR protein by its sim
 If there is any problem and advice with the website, you are welcome to contact us via [email](mailto:yaoyy@webmail.hzau.edu.cn).
 
 ## Contributers:
-* Yinying Yao
-* Zeyuan Guan
-* Junjie Yan
-* Xiang Wang
+* **Yinying Yao**: Main program development and further maintainance.
+* **Zeyuan Guan**: Basic Framework of the original webserver.
+* **Junjie Yan**: Writing and data collecting.
+* **Xiang Wang**: Providing useful advices to the original webserver design.
 
 ## Cite information
 Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, Zhang Delin, Zou Tingting, Yin Ping*. Delineation of pentatricopeptide repeat codes for target RNA prediction, Nucleic Acids Research. 2019 February 11. doi: doi.org/10.1093/nar/gkz075
