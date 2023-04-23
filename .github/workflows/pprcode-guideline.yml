@@ -58,13 +58,14 @@ jobs:
     - name: Update Readme file for CI actions
       run: |
         sed -e 's|\.\/image\/|https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image\/|g; s|(\image|(https:\/\/raw.githubusercontent.com\/YaoYinYing\/PPRCODE_Guideline\/master\/image|g' README.md >README.ci.md
-        
+        cat README.ci.md
+
     - name: Refresh Docker Hub Description
       uses: peter-evans/dockerhub-description@v3
       with:
         username: yaoyinying
         password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
-        repository: YaoYinYing/PPRCODE_Guideline
+        repository: yaoyinying/pprcode
         readme-filepath: ./README.md
         enable-url-completion: true
         
