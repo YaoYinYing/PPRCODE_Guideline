@@ -8,13 +8,12 @@ SHELL ["/bin/bash", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -qy  \
     && apt-get install -qy ca-certificates \
     && apt-get install -qy ${JDK_VER} \
-    && apt-get install -qy python3 python3-dev zip hmmer perl wget 
+    && apt-get install -qy python3 python3-dev python3-venv python3-pip zip hmmer perl wget 
 
 COPY . /app/pprcode
 
 # Install pip packages.
-RUN python3 -m pip install --upgrade pip \
-    && pip3 -q install --upgrade pip \
+RUN pip3 -q install --upgrade pip \
     && pip3 -q install pandas \
     && pip3 -q install biopython \
     && pip3 -q install matplotlib \
