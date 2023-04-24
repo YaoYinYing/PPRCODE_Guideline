@@ -87,10 +87,10 @@ Please switch to:
     wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
     
     # use PS_Scan as default program
-    python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
+    python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
     
     # or use pprfinder provided by Small's Lab
-    python  /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/PPR_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+    python  /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
     ```
  6. Advance options
     ```shell
