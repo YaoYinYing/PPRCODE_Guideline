@@ -66,11 +66,9 @@ flags.DEFINE_string(
     'by Docker unless that user has been created within the container.')
 
 FLAGS = flags.FLAGS
-try:
-    _ROOT_MOUNT_DIRECTORY = f'/home/{os.getlogin()}'
-except:
-    _ROOT_MOUNT_DIRECTORY = pathlib.Path('/home/runner/pprcode_ci_test/').resolve()
-    os.makedirs(_ROOT_MOUNT_DIRECTORY, exist_ok=True)
+
+_ROOT_MOUNT_DIRECTORY = f'/home/{os.getlogin()}'
+
 
 def _create_mount(mount_name: str, path: str) -> Tuple[types.Mount, str]:
     """Create a mount point for each file and directory used by the model."""
@@ -102,13 +100,11 @@ def main(argv):
     fasta = pathlib.Path(FLAGS.fasta).resolve()
     save_dir = pathlib.Path(FLAGS.save_dir).resolve()
 
-
     os.makedirs(save_dir, exist_ok=True)
 
-
-    mount, target_path = _create_mount('input', str(fasta))
-    mounts.append(mount)
-    command_args.append(f'--fasta={target_path}')
+    input_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'input')
+    mounts.append(types.Mount(input_target_path, str(fasta), type='bind'))
+    command_args.append(f'--fasta={input_target_path}')
 
     output_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'output')
     mounts.append(types.Mount(output_target_path, str(save_dir), type='bind'))
