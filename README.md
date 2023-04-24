@@ -40,19 +40,15 @@ Please switch to:
     ```shell
     pip3 install -U pybiolib
     ```
- 2. run the PPRCODE via Shell commands
+ 2. run PPRCODE via Shell commands
     ```shell
-    # read the help message
-    biolib run YaoYinYing/pprcode --help
- 
-    # fetch an example dataset 
     wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta 
     biolib run YaoYinYing/pprcode --fasta ppr_example.fasta
     ```
   **the run results will be located at $PWD/biolib_results**
   
 **PS**: 
-  _Due to the I/O issue of Biolib as a docker container wrapper, the customized `--save_dir` option will produce no results._
+  _Due to the I/O issue of Biolib as docker container wrapper, the customized `--save_dir` option will produce no results._
  
 ## Run PPRCODE locally in docker
  1. Install docker daemon by following the [official getting-started page](https://www.docker.com/get-started/) instruction.
@@ -71,6 +67,10 @@ Please switch to:
     cd PPRCODE_Guideline
     docker build -f docker/Dockerfile -t pprcode . 
     ```
+    Alternatively, if you wish to run PPRCODE with your own version of `docker/run_pprcode.py`, you may build a patched image for local usage by the following: 
+    ```shell
+    docker build -f docker/Dockerfile_patch -t pprcode .
+    ```
  4. Create Conda environment for run this docker image in an instance container
     ```shell
     conda create -y -n pprcode python pip
@@ -87,51 +87,14 @@ Please switch to:
     wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
     
     # use PS_Scan as default program
-    python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-1  --plot_item=bar,score,edge,ppr,rna
+    python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-ps_scan  --plot_item=bar,score,edge,ppr,rna
     
     # or use pprfinder provided by Small's Lab
-    python  /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-2 --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+    python  /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
     ```
  6. Advance options
     ```shell
     python  /repo/PPRCODE_Guideline/docker/run_docker.py --help
-    Docker launch script for PPRCODE docker image.
-    flags:
-    
-    /repo/PPRCODE_Guideline/docker/run_docker.py:
-      --bin_dir: Where additional required binaries locate.
-        (default: '/app/bin/')
-      --[no]debug: debug messages
-        (default: 'false')
-      --docker_image_name: Name of the PPRCODE Docker image.
-        (default: 'pprcode')
-      --docker_user: UID:GID with which to run the Docker container. The output directories will be owned by this user:group. By default, this is the current user. Valid options are: uid or uid:gid, non-numeric values
-        are not recognised by Docker unless that user has been created within the container.
-        (default: '1005:50')
-      --fasta: input FASTA file(s) for scan.
-      --[no]fix_gap: Fix gap in sequence scanning results. Turn it off so that the results will not be weird.
-        (default: 'false')
-      --plot_color_scheme: <Accent|Accent_r|Blues|Blues_r|BrBG|BrBG_r|BuGn|BuGn_r|BuPu|BuPu_r|CMRmap|CMRmap_r|Dark2|Dark2_r|GnBu|GnBu_r|Greens|Greens_r|Greys|Greys_r|OrRd|OrRd_r|Oranges|Oranges_r|PRGn|PRGn_r|Paired|Pai
-        red_r|Pastel1|Pastel1_r|Pastel2|Pastel2_r|PiYG|PiYG_r|PuBu|PuBuGn|PuBuGn_r|PuBu_r|PuOr|PuOr_r|PuRd|PuRd_r|Purples|Purples_r|RdBu|RdBu_r|RdGy|RdGy_r|RdPu|RdPu_r|RdYlBu|RdYlBu_r|RdYlGn|RdYlGn_r|Reds|Reds_r|Set1|S
-        et1_r|Set2|Set2_r|Set3|Set3_r|Spectral|Spectral_r|Wistia|Wistia_r|YlGn|YlGnBu|YlGnBu_r|YlGn_r|YlOrBr|YlOrBr_r|YlOrRd|YlOrRd_r|afmhot|afmhot_r|autumn|autumn_r|binary|binary_r|bone|bone_r|brg|brg_r|bwr|bwr_r|civi
-        dis|cividis_r|cool|cool_r|coolwarm|coolwarm_r|copper|copper_r|cubehelix|cubehelix_r|flag|flag_r|gist_earth|gist_earth_r|gist_gray|gist_gray_r|gist_heat|gist_heat_r|gist_ncar|gist_ncar_r|gist_rainbow|gist_rainbo
-        w_r|gist_stern|gist_stern_r|gist_yarg|gist_yarg_r|gnuplot|gnuplot2|gnuplot2_r|gnuplot_r|gray|gray_r|hot|hot_r|hsv|hsv_r|inferno|inferno_r|jet|jet_r|magma|magma_r|nipy_spectral|nipy_spectral_r|ocean>: Color
-        scheme for plot
-        (default: 'RdBu')
-      --plot_item: plot PPRCODE results in what ways.
-        (default: 'bar,ppr,rna,type,edge')
-        (a comma separated list)
-      --profile_dir: Where additional required profiles locate.
-        (default: '/app/profiles/')
-      --program: <ps_scan|pprfinder>: Choose a proper algorithm to process your sequence. PPRCODE use PS_Scan(ps_scan) by default. However, you may use PPRfinder(pprfinder) from Small's Lab
-        (default: 'ps_scan')
-      --[no]report: Generate a human-friendly report file in xlsx format
-        (default: 'true')
-      --[no]run_benchmark: Fetch a benchmark dataset. **This could make your job running messy.**
-        (default: 'false')
-      --save_dir: Path to save run results.
-        (default: './results')
-    
     ```
 
 
