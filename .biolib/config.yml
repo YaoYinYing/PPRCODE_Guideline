@@ -192,15 +192,15 @@ arguments:
             'Off': 'false'
         required: false # optional, default is true
 
-    -   key: --fix_gap # required
-        description: 'Fix gap in sequence scanning results while using PS_Scan. Turn it off by default so that the results will not be weird.' # required
-        key_value_separator: '=' # optional, default is ' '
-        default_value: 'false' # optional, default is ''
-        type: dropdown # required
-        options:
-            'On': 'true'
-            'Off': 'false'
-        required: false # optional, default is true
+    # -   key: --fix_gap # required
+    #     description: 'Fix gap in sequence scanning results while using PS_Scan. Turn it off by default so that the results will not be weird.' # required
+    #     key_value_separator: '=' # optional, default is ' '
+    #     default_value: 'false' # optional, default is ''
+    #     type: dropdown # required
+    #     options:
+    #         'On': 'true'
+    #         'Off': 'false'
+    #     required: false # optional, default is true
 
 description_file: README.ci.md
 

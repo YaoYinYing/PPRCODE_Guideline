@@ -11,7 +11,9 @@ _Cover Image is presented with [**MolecularNodes Project**](https://github.com/B
 [![Platform: docker](https://img.shields.io/badge/Platform-docker-blue.svg)](https://hub.docker.com/r/yaoyinying/pprcode)
 [![Build in x86_64](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)
 ----
-
+[![PPRCODE Workflow](https://github.com/YaoYinYing/PPRCODE_Guideline/actions/workflows/pprcode-guideline.yml/badge.svg)](https://github.com/YaoYinYing/PPRCODE_Guideline/actions/workflows/pprcode-guideline.yml)
+[![Docker Image Pulls](https://img.shields.io/docker/pulls/yaoyinying/pprcode)](https://hub.docker.com/r/yaoyinying/pprcode)
+----
 
 # PPRCODE
 

@@ -1,17 +1,17 @@
-name: PPRCODE_Guideline Workflow
+name: PPRCODE_Guideline Workflow - for README refreshing
 
 on:
   push:
     paths:
-      - 'docker/**' # Monitor the entire 'docker' directory
-      - 'scripts/**' # Monitor the entire 'scripts' directory
-      #- '.github/workflows/pprcode-guideline.yml' # monitor the main workflow script. enable it again if in necessary maintainances.
+      - 'README.md'  # Monitor the 'README.md' file
+      - '.github/workflows/pprcode-refresh-readme.yml'  # Monitor the 'README.md' ci script file
+      - '.biolib/config.yml'  # Monitor the Biolib config file
 
     branches:
       - master
     
 jobs:
-  build-and-push:
+  refresh-and-push:
     runs-on: ubuntu-latest
     
     steps:
@@ -28,13 +28,13 @@ jobs:
         echo "REPO=$PWD" >> $GITHUB_ENV
         echo "REPO: ${{ env.REPO }}"
       
-    - name: Build Docker image
-      run: docker build -f docker/Dockerfile -t pprcode .
+    # - name: Build Docker image
+    #   run: docker build -f docker/Dockerfile -t pprcode .
 
-    - name: Tag Docker image with date and latest
-      run: |
-        docker tag pprcode yaoyinying/pprcode:${{ env.DATE }}
-        docker tag pprcode yaoyinying/pprcode:latest
+    # - name: Tag Docker image with date and latest
+    #   run: |
+    #     docker tag pprcode yaoyinying/pprcode:${{ env.DATE }}
+    #     docker tag pprcode yaoyinying/pprcode:latest
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_GITHUB_REPO_SECRET }}" | docker login -u yaoyinying --password-stdin
@@ -48,25 +48,25 @@ jobs:
     #     python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/PPR_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
     #     deactivate 
         
-    - name: Push Docker image
-      run: |
-        cd ${{ env.REPO }}
-        docker push yaoyinying/pprcode:${{ env.DATE }}
-        docker push yaoyinying/pprcode:latest
+    # - name: Push Docker image
+    #   run: |
+    #     cd ${{ env.REPO }}
+    #     docker push yaoyinying/pprcode:${{ env.DATE }}
+    #     docker push yaoyinying/pprcode:latest
 
     - name: Update Readme file for CI actions
       run: |
         awk '{if ($0 !~ "https://img.shields.io" && $0 !~ "badge.svg" ){print }}' README.md >README.ci.md
         cat README.ci.md
 
-    # - name: Refresh Docker Hub Description
-    #   uses: peter-evans/dockerhub-description@v3
-    #   with:
-    #     username: yaoyinying
-    #     password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
-    #     repository: yaoyinying/pprcode
-    #     readme-filepath: ./README.md
-    #     enable-url-completion: true
+    - name: Refresh Docker Hub Description
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: yaoyinying
+        password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
+        repository: yaoyinying/pprcode
+        readme-filepath: ./README.md
+        enable-url-completion: true
         
     - name: Install pybiolib package
       run: pip3 install -U pybiolib
