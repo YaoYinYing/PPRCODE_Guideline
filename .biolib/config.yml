@@ -10,7 +10,6 @@ modules:
             - COPY /home/biolib/pprcode/save_dir/PPRCODE_results.zip /
         source_files:
             - COPY / /home/biolib/pprcode/
-        main_output_file: /home/biolib/pprcode/save_dir/PPRCODE_results.md
 arguments:
     -
         default_value: /input.fa
@@ -204,7 +203,7 @@ arguments:
     #     required: false # optional, default is true
 
 description_file: README.ci.md
-
+main_output_file: /home/biolib/pprcode/save_dir/PPRCODE_results.md
 citation:
     entry_type: article
     author: Yan, Junjie and Yao, Yinying and Hong, Sixing and Yang, Yan and Shen, Cuicui and Zhang, Qunxia and Zhang, Delin and Zou, Tingting and Yin, Ping
