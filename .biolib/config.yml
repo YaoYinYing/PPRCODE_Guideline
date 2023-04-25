@@ -186,17 +186,7 @@ arguments:
             'colorbar': 'bar'
         required: false # optional, default is true
 
-#    -   key: --report # required
-#        description: 'Generate a human-friendly report file in xlsx format:' # required
-#        key_value_separator: '=' # optional, default is ' '
-#        default_value: 'true' # optional, default is ''
-#        type: dropdown # required
-#        options:
-#            'On': 'true'
-#            'Off': 'false'
-#        required: false # optional, default is true
-
-     -   key: --debug # required
+    -    key: --debug # required
          description: 'Debug PPRCODE' # required
          key_value_separator: '=' # optional, default is ' '
          default_value: 'false' # optional, default is ''
