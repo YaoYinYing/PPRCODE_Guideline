@@ -6,7 +6,8 @@ on:
       - 'docker/**' # Monitor the entire 'docker' directory
       - 'scripts/**' # Monitor the entire 'scripts' directory
       - '.github/workflows/pprcode-guideline.yml' # monitor the main workflow script. enable it again if in necessary maintainances.
-
+      - '.biolib/config.yml'  # Monitor the Biolib config file
+    
     branches:
       - master
     
