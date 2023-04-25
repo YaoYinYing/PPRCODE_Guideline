@@ -1,25 +1,18 @@
-# set ubuntu as backend OS
-FROM ubuntu:20.04
-ARG JDK_VER=openjdk-17-jdk-headless
+# set alpine as backend OS
+FROM alpine:3.14
 
-# Use bash to support string substitution.
-SHELL ["/bin/bash", "-c"]
+ARG JDK_VER=openjdk17
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -qy  \
-    && apt-get install -qy ca-certificates \
-    && apt-get install -qy ${JDK_VER} \
-    && apt-get install -qy python3 python3-dev python3-venv python3-pip zip hmmer perl wget 
+# Install dependencies
+RUN apk update \
+    && apk add --no-cache ca-certificates ${JDK_VER} python3 py3-dev py3-venv py3-pip zip hmmer perl wget \
+    && rm -rf /var/cache/apk/*
 
 COPY . /app/pprcode
 
-# Install pip packages.
-RUN pip3 -q install --upgrade pip \
-    && pip3 -q install pandas \
-    && pip3 -q install biopython \
-    && pip3 -q install matplotlib \
-    && pip3 -q install dna_features_viewer \
-    && pip3 -q install xlsxwriter \
-    && pip3 -q install absl-py
+# Install pip packages
+RUN pip3 install --upgrade pip \
+    && pip3 install pandas biopython matplotlib dna_features_viewer xlsxwriter absl-py==0.13.0
 
 # PS_scan setting/ PPRfinder setting
 ARG PROSITE_URL='https://ftp.expasy.org/databases/prosite/'
@@ -41,13 +34,13 @@ RUN mkdir /app/profiles \
     && wget -qnc ${HMM_PROFILE_URL}/all_PPR.hmm -P /app/profiles/
 
 # Add SETUID bit to the ldconfig binary so that non-root users can run it.
-RUN chmod u+s /sbin/ldconfig.real
+RUN chmod u+s /sbin/ldconfig
 
 WORKDIR /app/pprcode
 
 ENV PATH="/app/bin/ps_scan:$PATH"
 
-RUN echo $'#!/bin/bash\n\
+RUN echo $'#!/bin/sh\n\
 ldconfig\n\
 python3 /app/pprcode/docker/run_pprcode.py "$@"' > /app/run_pprcode.sh \
   && chmod +x /app/run_pprcode.sh

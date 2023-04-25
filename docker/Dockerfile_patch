@@ -1,0 +1,22 @@
+# set ubuntu as backend OS
+FROM yaoyinying/pprcode:latest
+
+# Use bash to support string substitution.
+SHELL ["/bin/bash", "-c"]
+
+
+COPY . /app/pprcode
+
+
+# Add SETUID bit to the ldconfig binary so that non-root users can run it.
+RUN chmod u+s /sbin/ldconfig.real
+
+
+WORKDIR /app/pprcode
+ENV PATH="/app/bin/ps_scan:$PATH"
+
+RUN echo $'#!/bin/bash\n\
+ldconfig\n\
+python3 /app/pprcode/docker/run_pprcode.py "$@"' > /app/run_pprcode.sh \
+  && chmod +x /app/run_pprcode.sh
+ENTRYPOINT ["/app/run_pprcode.sh"]
