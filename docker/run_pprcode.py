@@ -9,7 +9,6 @@ import re
 import tempfile
 import time
 import traceback
-import subprocess
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -144,16 +143,17 @@ def ps_scan(f, s, debug, RES_DIR_SCAN, profile_dir, bin_dir, fix_gap):
           motif_delete_find = re.findall(r'' + origin_motif + '(-+)', result_response_scan)[0]
         else:
           motif_delete_find = ''
-        logging.debug(f"orginal Motif= {origin_motif}\t motif deletion={motif_delete_find}\t deletion length={len(motif_delete_find)}")
+        logging.debug(
+          f"orginal Motif= {origin_motif}\t motif deletion={motif_delete_find}\t deletion length={len(motif_delete_find)}")
         refinedpos[0].append(int(origin_pos[0]))
 
         # V1.3.1 solve the motif boundary overlap
         if (len(refinedpos[1]) > 0 and refinedpos[1][-1] > refinedpos[0][-1]):
           logging.debug(
-            f"==>refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}" )
+            f"==>refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}")
           refinedpos[1][-1] = refinedpos[0][-1]
           logging.debug(
-            f"-->refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}" )
+            f"-->refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}")
 
         refinedpos[1].append(int(origin_pos[1]) + 1 + len(motif_delete_find))
 
@@ -332,7 +332,7 @@ def draw_my_ppr(s, ppr, features, cmap, scores, program, fixed_plot_width, RES_D
     ax.figure.savefig(f'{RES_DIR_FIGURE}/{feature}-{s.id}.png')
 
 
-def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature,program, debug):
+def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program, debug):
   pkls_files = glob.glob(f'{RES_DIR_PICKLE}/*.pkl')
   process_id = time.strftime("%Y%m%d_%H%M%S", time.localtime())
   xlsx_filename = f"{RES_DIR_REPORT}/PPRCODE_RESULTS_{process_id}.xlsx"
@@ -348,7 +348,7 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature,program, d
 
   total = len(pkls_files)
 
-  report_md_write_handle=open(f'{RES_DIR_REPORT.parent}/PPRCODE_results.md','w')
+  report_md_write_handle = open(f'{RES_DIR_REPORT.parent}/PPRCODE_results.md', 'w')
 
   report_md_write_handle.write(f'# PPRCODE Report\n'
                                f'_created at {time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())}_\n\n')
@@ -391,7 +391,7 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature,program, d
         report_md_write_handle.write(f'### {seq_id}\n'
                                      f'#### Table\n'
                                      f'Start | End | Sequence | #5  | #35 | PPR Code | RNA base | Length | Score | Type \n'
-                                      '----  |-----|   :---   | ---- | ---- | ----  |  ----  | ---- |  ---- | ---- \n')
+                                     '----  |-----|   :---   | ---- | ---- | ----  |  ----  | ---- |  ---- | ---- \n')
         for motif_info in data_list:
           report_md_write_handle.write(f"{' | '.join([str(x) for x in motif_info])}\n")
 
@@ -410,7 +410,6 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature,program, d
       logging.warning("Oops! Something wrong happens when loading pickle file!")
       logging.warning(seq_id)
       traceback.print_exc() if debug else logging.warning(e)
-
 
   report_md_write_handle.write(f'---\n\n'
                                f'**End of the report**\n\n'
@@ -636,7 +635,8 @@ def main(argv):
 
   if generate_excel_report:
     logging.info(f'generating report ...')
-    generate_full_report(RES_DIR_REPORT=RES_DIR_REPORT, RES_DIR_PICKLE=RES_DIR_PICKLE,plot_feature=what_to_plot, program=program, debug=debug)
+    generate_full_report(RES_DIR_REPORT=RES_DIR_REPORT, RES_DIR_PICKLE=RES_DIR_PICKLE, plot_feature=what_to_plot,
+                         program=program, debug=debug)
 
   zipped = f'PPRCODE_results.zip'
   os.system(f"zip -FSr {RES_DIR}/{zipped} {RES_DIR} >/dev/null")
