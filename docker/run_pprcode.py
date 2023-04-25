@@ -30,7 +30,7 @@ code2rna_multi = {"ND": "U>C>G", "NN": "C>U", "TD": "G>A>U", "SD": "G>>C", "TN":
                   "KN": "C>U", "NR": "-", "DN": "C", "CS": "A", "QD": "-", "NV": "C>U", "ED": "-", "IN": "-",
                   "VS": "-", "HN": "-", "AT": "-", "NH": "U>C", "AG": "-", "NI": "C", }
 
-BENCHMARK_DATA = 'https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ATPPR.fasta'
+BENCHMARK_DATA = 'https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/main/ATPPR.fasta'
 
 # PS_scan setting
 PS_MOTIF = 'PS51375'
@@ -390,9 +390,9 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program):
           report_md_write_handle.write(f"{' | '.join([str(x) for x in motif_info])}\n")
 
         report_md_write_handle.write(f'\n#### Plots\n')
-        report_md_write_handle.write(f'![Colorbar](./figure/Colorbar-{program}.png)\n')
+        report_md_write_handle.write(f'![Colorbar](figure/Colorbar-{program}.png)\n')
         for feature in plot_feature:
-          report_md_write_handle.write(f'![{feature}-{seq_id}](./figure/{feature}-{seq_id}.png)\n')
+          report_md_write_handle.write(f'![{feature}-{seq_id}](figure/{feature}-{seq_id}.png)\n')
         report_md_write_handle.write('\n\n')
       except Exception as e:
         logging.error("Oops! Something wrong happens when writing in to excel report!")

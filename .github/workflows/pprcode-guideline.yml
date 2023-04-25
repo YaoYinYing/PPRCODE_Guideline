@@ -9,7 +9,7 @@ on:
       - '.biolib/config.yml'  # Monitor the Biolib config file
 
     branches:
-      - master
+      - main
     
 jobs:
   build-and-push:

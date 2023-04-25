@@ -6,7 +6,7 @@ _Cover Image is presented with [**MolecularNodes Project**](https://github.com/B
 ---
 [![Paper-PPRCODE](https://img.shields.io/badge/Paper-PPRCODE-blueviolet.svg)](https://doi.org/10.1093/nar/gkz075)
 [![Made in China](https://img.shields.io/badge/Made%20in-China-yellow.svg)](http://yinlab.hzau.edu.cn/pprcode/)
-[![Available at Google Colab](https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg)](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
+[![Available at Google Colab](https://img.shields.io/badge/Available%20at-Google%20Colab-red.svg)](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/main/PPRCODE.ipynb)
 [![Available at BioLib](https://img.shields.io/badge/Available%20at-BioLib-brightgreen.svg)](https://biolib.com/YaoYinYing/pprcode/)
 [![Platform: docker](https://img.shields.io/badge/Platform-docker-blue.svg)](https://hub.docker.com/r/yaoyinying/pprcode)
 [![Build in x86_64](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)](https://img.shields.io/badge/Build%20in-x86__64-ff69b4.svg)
@@ -32,7 +32,7 @@ Please switch to:
 
  1. [WebServer from BioLib](https://biolib.com/YaoYinYing/pprcode/); 
  **the [original webserver](http://yinlab.hzau.edu.cn/pprcode/) provided by [Yin Lab](http://yinlab.hzau.edu.cn/) is down and will be no longer maintained.**
- 2. [Colab Reimplementation](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/master/PPRCODE.ipynb)
+ 2. [Colab Reimplementation](https://colab.research.google.com/github/YaoYinYing/PPRCODE_Guideline/blob/main/PPRCODE.ipynb)
  3. Local run: Docker image or BioLib cloud scripts
  
 ## Run PPRCODE locally via APIs provided by BioLib
@@ -42,7 +42,7 @@ Please switch to:
     ```
  2. run PPRCODE via Shell commands
     ```shell
-    wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta 
+    wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/main/ppr_example.fasta 
     biolib run YaoYinYing/pprcode --fasta ppr_example.fasta
     ```
   **the run results will be located at $PWD/biolib_results**
@@ -84,7 +84,7 @@ Please switch to:
     mkdir test
     
     # fetch an example dataset 
-    wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/master/ppr_example.fasta -P test
+    wget -qnc https://raw.githubusercontent.com/YaoYinYing/PPRCODE_Guideline/main/ppr_example.fasta -P test
     
     # use PS_Scan as default program
     python /repo/PPRCODE_Guideline/docker/run_docker.py --fasta test/ppr_example.fasta --save_dir ./save-ps_scan  --plot_item=bar,score,edge,ppr,rna
