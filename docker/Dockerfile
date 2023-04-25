@@ -19,7 +19,7 @@ RUN pip3 -q install --upgrade pip \
     && pip3 -q install matplotlib \
     && pip3 -q install dna_features_viewer \
     && pip3 -q install xlsxwriter \
-    && pip3 -q install absl-py==0.13.0
+    && pip3 -q install absl-py
 
 # PS_scan setting/ PPRfinder setting
 ARG PROSITE_URL='https://ftp.expasy.org/databases/prosite/'
