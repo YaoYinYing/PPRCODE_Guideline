@@ -7,7 +7,7 @@ on:
       - 'scripts/**' # Monitor the entire 'scripts' directory
       - '.github/workflows/pprcode-guideline.yml' # monitor the main workflow script. enable it again if in necessary maintainances.
       - '.biolib/config.yml'  # Monitor the Biolib config file
-    
+
     branches:
       - master
     
@@ -45,8 +45,8 @@ jobs:
         python -m venv pprcode_test
         source pprcode_test/bin/activate
         pip install -r docker/requirements.txt
-        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/ppr_example.fasta --save_dir ./save-psscan --plot_item=bar,score,edge,ppr,rna
-        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/ppr_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder
+        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/ppr_example.fasta --save_dir ./save-psscan --plot_item=bar,score,edge,ppr,rna --debug
+        python ${{ env.REPO }}/docker/run_docker.py --fasta ${{ env.REPO }}/ppr_example.fasta --save_dir ./save-pprfinder --plot_item=bar,score,edge,ppr,rna --program=pprfinder --debug
         deactivate 
         
     - name: Push Docker image
@@ -59,15 +59,6 @@ jobs:
       run: |
         awk '{if ($0 !~ "https://img.shields.io" && $0 !~ "badge.svg" ){print }}' README.md >README.ci.md
         cat README.ci.md
-
-    # - name: Refresh Docker Hub Description
-    #   uses: peter-evans/dockerhub-description@v3
-    #   with:
-    #     username: yaoyinying
-    #     password: ${{ secrets.DOCKER_GITHUB_REPO_SECRET }}
-    #     repository: yaoyinying/pprcode
-    #     readme-filepath: ./README.md
-    #     enable-url-completion: true
         
     - name: Install pybiolib package
       run: pip3 install -U pybiolib
