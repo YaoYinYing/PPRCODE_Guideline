@@ -414,7 +414,10 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program, 
   report_md_write_handle.write(f'---\n\n'
                                f'**End of the report**\n\n'
                                f'## Citation\n'
-                               f'{citations_banner}\n\n')
+                               f'Yan Junjie#, Yao Yinying#, Hong Sixing, Yang Yan, Shen Cuicui, Zhang Qunxia, '
+                               f'Zhang Delin, Zou Tingting, Yin Ping*. Delineation of pentatricopeptide repeat '
+                               f'codes for target RNA prediction, Nucleic Acids Research. '
+                               f'2019 February 11. doi: doi.org/10.1093/nar/gkz075\n\n')
 
   logging.info("All jobs are accomplished.")
   test_book.close()
