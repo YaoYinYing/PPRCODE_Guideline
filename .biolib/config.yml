@@ -7,9 +7,7 @@ modules:
         input_files:
             - COPY / /home/biolib/
         output_files:
-            - COPY /home/biolib/pprcode/save_dir/PPRCODE_results.zip /
-            - COPY /home/biolib/pprcode/save_dir/PPRCODE_results.md /
-            - COPY /home/biolib/pprcode/save_dir/figure/ /
+            - COPY /home/biolib/pprcode/save_dir/ /
         source_files: []
 
 main_output_file: /PPRCODE_results.md
