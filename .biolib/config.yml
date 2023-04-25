@@ -204,7 +204,7 @@ arguments:
     #     required: false # optional, default is true
 
 description_file: README.ci.md
-main_output_file: PPRCODE_results.md
+main_output_file: /PPRCODE_results.md
 citation:
     entry_type: article
     author: Yan, Junjie and Yao, Yinying and Hong, Sixing and Yang, Yan and Shen, Cuicui and Zhang, Qunxia and Zhang, Delin and Zou, Tingting and Yin, Ping
