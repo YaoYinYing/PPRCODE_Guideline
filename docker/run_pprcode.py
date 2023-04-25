@@ -8,7 +8,6 @@ import pickle
 import re
 import tempfile
 import time
-import traceback
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -19,7 +18,7 @@ from absl import app
 from absl import flags
 from absl import logging
 from dna_features_viewer import GraphicFeature, GraphicRecord
-from matplotlib import cm
+
 
 # updated at 2018/12/20 for pulication, experimentally validated.
 code2rna_multi = {"ND": "U>C>G", "NN": "C>U", "TD": "G>A>U", "SD": "G>>C", "TN": "A>G", "SN": "A", "NS": "C>U>A",
@@ -48,9 +47,8 @@ banner = '''
 !   / / /      / / /      / / /\ \ \  / / /________  / / /___/ / / \ \ \__/ / // / /______    
 !  / / /      / / /      / / /  \ \ \/ / /_________\/ / /____\/ /   \ \___\/ // / /_______\   
 !  \/_/       \/_/       \/_/    \_\/\/____________/\/_________/     \/_____/ \/__________/   
-!                                                                                           
-!                                                                                          
-!                               Reimplemented by Yinying Yao (github.com/YaoYinYing)                                                                    
+!                                                                                                                                                                                    
+!                         Reimplemented by Yinying Yao (github.com/YaoYinYing)                                                                    
 '''
 
 citations_banner = '''
@@ -106,146 +104,143 @@ flags.DEFINE_bool(
 FLAGS = flags.FLAGS
 
 
-def ps_scan(f, s, debug, RES_DIR_SCAN, profile_dir, bin_dir, fix_gap):
-  logging.debug(s.id)
-  sequence_ = s
-  # logging.info(sequence_)
-  ps_out_file = f"{RES_DIR_SCAN}/{s.id}_PPR_PSSCAN_pff.log"
-  cmd = f"perl {bin_dir}/ps_scan/ps_scan.pl -e {s.id} -p {PS_MOTIF} -o pff -d {profile_dir}/prosite.dat {f} | sort -n -k 2 > {ps_out_file}"
-  os.system(cmd)
-  ps_out_file_scan = f"{RES_DIR_SCAN}/{s.id}_PPR_PSSCAN_scan.log"
-  cmd = f"perl {bin_dir}/ps_scan/ps_scan.pl -e {s.id} -p {PS_MOTIF} -o scan -d {profile_dir}/prosite.dat {f} | sort -n -k 2 > {ps_out_file_scan}"
-  os.system(cmd)
-  try:
-    # this is totally bullshit but working
-    result_response_pff = open(ps_out_file, 'r').read()
-    matchpos = re.findall(r'(\d+)\t(\d+)\t%s' % PS_MOTIF, result_response_pff)
-    # logging.info(matchpos)
-    refinedpos = [[], []]
-
-    # logging.info(matchpos)
-    match_motif = []
-
-    # get original match motifs
-    for pos in matchpos:
-      mypos = sequence_[int(pos[0]) - 1:int(pos[1])]
-      mypos.id = f'{s.id}_{int(pos[0]) - 1}_{pos[1]}'
-      match_motif.append(mypos)
-
-    logging.debug(match_motif)
-    # find the motif sequence deletion by ProSite and refine the positions
-
-    result_response_scan = open(ps_out_file_scan, 'r').read()
-    for origin_motif, origin_pos in zip([str(x.seq) for x in match_motif], matchpos):
-      try:
-        logging.debug(origin_motif)
-        if fix_gap:
-          motif_delete_find = re.findall(r'' + origin_motif + '(-+)', result_response_scan)[0]
-        else:
-          motif_delete_find = ''
-        logging.debug(
-          f"orginal Motif= {origin_motif}\t motif deletion={motif_delete_find}\t deletion length={len(motif_delete_find)}")
-        refinedpos[0].append(int(origin_pos[0]))
-
-        # V1.3.1 solve the motif boundary overlap
-        if (len(refinedpos[1]) > 0 and refinedpos[1][-1] > refinedpos[0][-1]):
-          logging.debug(
-            f"==>refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}")
-          refinedpos[1][-1] = refinedpos[0][-1]
-          logging.debug(
-            f"-->refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}")
-
-        refinedpos[1].append(int(origin_pos[1]) + 1 + len(motif_delete_find))
-
-      except Exception as e:
-        # traceback.logging.info_exc()
-        logging.debug(f"original Motif= {origin_motif}\t motif deletion= deletion not found.")
-        refinedpos[0].append(int(origin_pos[0]))
-        refinedpos[1].append(int(origin_pos[1]) + 1)
-
-    # the second round of refinement of position: the conserved "P" and the 36 aa length motif  # the conserved "P" label is based on weblogo results
-    # Eureka!
-    refindpos_end_2nd = []
+def ps_scan(sequence, RES_DIR_SCAN, profile_dir, bin_dir, fix_gap):
+  logging.debug(sequence.id)
+  with tempfile.NamedTemporaryFile(suffix=f'_{sequence.id}.fasta', delete=True) as tmp_fasta_file:
+    SeqIO.write(sequence, tmp_fasta_file.name, "fasta")
+    ps_out_file = f"{RES_DIR_SCAN}/{sequence.id}_PPR_PSSCAN_pff.log"
+    cmd = f"perl {bin_dir}/ps_scan/ps_scan.pl -e {sequence.id} -p {PS_MOTIF} -o pff -d {profile_dir}/prosite.dat {tmp_fasta_file.name} | sort -n -k 2 > {ps_out_file}"
+    os.system(cmd)
+    ps_out_file_scan = f"{RES_DIR_SCAN}/{sequence.id}_PPR_PSSCAN_scan.log"
+    cmd = f"perl {bin_dir}/ps_scan/ps_scan.pl -e {sequence.id} -p {PS_MOTIF} -o scan -d {profile_dir}/prosite.dat {tmp_fasta_file.name} | sort -n -k 2 > {ps_out_file_scan}"
+    os.system(cmd)
     try:
-      pos_index = 0
-      for refinedpos_start_slide, refinedpos_end_slide in zip(refinedpos[0], refinedpos[1]):
-        logging.debug(f"refined pos[{pos_index}]: {refinedpos_start_slide} -> {refinedpos_end_slide}")
-        logging.debug(sequence_[refinedpos_start_slide:refinedpos_end_slide])
-        logging.debug(f"Scanning the {pos_index + 1}/{refinedpos[0].__len__()} motif...")
-        if pos_index < (refinedpos[0].__len__() - 1):
-          try:
-            if (refinedpos[0][pos_index + 1] - refinedpos[1][
-              pos_index] == 1 and
-                sequence_[refinedpos_start_slide:refinedpos_end_slide][-1] == "P"):
-              logging.debug("Find P!")
-              logging.debug(len(sequence_[refinedpos_start_slide:refinedpos_end_slide]))
-              logging.debug(sequence_[refinedpos_start_slide:refinedpos_end_slide][-1])
-              refindpos_end_2nd.append(refinedpos_end_slide + 1)
-              pass
-            else:
-              logging.debug("No P find!")
-              refindpos_end_2nd.append(refinedpos_end_slide)
-          except:
-            refindpos_end_2nd.append(refinedpos_end_slide)
-        elif pos_index == (refinedpos[0].__len__() - 1):
-          if sequence_[refinedpos_start_slide:refinedpos_end_slide][-1] == "P":
-            logging.debug("Find P in the last motif...")
-            logging.debug(len(sequence_[refinedpos_start_slide:refinedpos_end_slide]))
-            logging.debug(sequence_[refinedpos_start_slide:refinedpos_end_slide][-1])
-            refindpos_end_2nd.append(refinedpos_end_slide + 1)
+      # this is totally bullshit but working
+      result_response_pff = open(ps_out_file, 'r').read()
+      matchpos = re.findall(r'(\d+)\t(\d+)\t%s' % PS_MOTIF, result_response_pff)
+      refinedpos = [[], []]
 
+
+      match_motif = []
+
+      # get original match motifs
+      for pos in matchpos:
+        mypos = sequence[int(pos[0]) - 1:int(pos[1])]
+        mypos.id = f'{sequence.id}_{int(pos[0]) - 1}_{pos[1]}'
+        match_motif.append(mypos)
+
+      logging.debug(match_motif)
+      # find the motif sequence deletion by ProSite and refine the positions
+
+      result_response_scan = open(ps_out_file_scan, 'r').read()
+      for origin_motif, origin_pos in zip([str(x.seq) for x in match_motif], matchpos):
+        try:
+          logging.debug(origin_motif)
+          if fix_gap:
+            motif_delete_find = re.findall(r'' + origin_motif + '(-+)', result_response_scan)[0]
           else:
-            logging.debug("No P find in the last motif...")
-            refindpos_end_2nd.append(refinedpos_end_slide)
-        pos_index += 1
+            motif_delete_find = ''
+          logging.debug(
+            f"orginal Motif= {origin_motif}\t motif deletion={motif_delete_find}\t deletion length={len(motif_delete_find)}")
+          refinedpos[0].append(int(origin_pos[0]))
+
+          # V1.3.1 solve the motif boundary overlap
+          if (len(refinedpos[1]) > 0 and refinedpos[1][-1] > refinedpos[0][-1]):
+            logging.debug(
+              f"==>refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}")
+            refinedpos[1][-1] = refinedpos[0][-1]
+            logging.debug(
+              f"-->refine pos 0 = {refinedpos[0][-1]}\t refine pos 1 = {refinedpos[1][-1]}")
+
+          refinedpos[1].append(int(origin_pos[1]) + 1 + len(motif_delete_find))
+
+        except Exception as e:
+          logging.debug(f"original Motif= {origin_motif}\t motif deletion= deletion not found.")
+          refinedpos[0].append(int(origin_pos[0]))
+          refinedpos[1].append(int(origin_pos[1]) + 1)
+
+      # the second round of refinement of position: the conserved "P" and the 36 aa length motif  # the conserved "P" label is based on weblogo results
+      # Eureka!
+      refindpos_end_2nd = []
+      try:
+        pos_index = 0
+        for refinedpos_start_slide, refinedpos_end_slide in zip(refinedpos[0], refinedpos[1]):
+          logging.debug(f"refined pos[{pos_index}]: {refinedpos_start_slide} -> {refinedpos_end_slide}")
+          logging.debug(sequence[refinedpos_start_slide:refinedpos_end_slide])
+          logging.debug(f"Scanning the {pos_index + 1}/{refinedpos[0].__len__()} motif...")
+          if pos_index < (refinedpos[0].__len__() - 1):
+            try:
+              if (refinedpos[0][pos_index + 1] - refinedpos[1][
+                pos_index] == 1 and
+                  sequence[refinedpos_start_slide:refinedpos_end_slide][-1] == "P"):
+                logging.debug("Find P!")
+                logging.debug(len(sequence[refinedpos_start_slide:refinedpos_end_slide]))
+                logging.debug(sequence[refinedpos_start_slide:refinedpos_end_slide][-1])
+                refindpos_end_2nd.append(refinedpos_end_slide + 1)
+                pass
+              else:
+                logging.debug("No P find!")
+                refindpos_end_2nd.append(refinedpos_end_slide)
+            except:
+              refindpos_end_2nd.append(refinedpos_end_slide)
+          elif pos_index == (refinedpos[0].__len__() - 1):
+            if sequence[refinedpos_start_slide:refinedpos_end_slide][-1] == "P":
+              logging.debug("Find P in the last motif...")
+              logging.debug(len(sequence[refinedpos_start_slide:refinedpos_end_slide]))
+              logging.debug(sequence[refinedpos_start_slide:refinedpos_end_slide][-1])
+              refindpos_end_2nd.append(refinedpos_end_slide + 1)
+
+            else:
+              logging.debug("No P find in the last motif...")
+              refindpos_end_2nd.append(refinedpos_end_slide)
+          pos_index += 1
+      except Exception as e:
+        logging.error("Oops! Something wrong happens with the following sequence!")
+        logging.error(f"--->{sequence.id}")
+        logging.error(e)
+      finally:
+        logging.debug(refindpos_end_2nd)
+
+      logging.debug(match_motif)
+      logging.debug(refinedpos)
+
+      # extract motifs scores according to the match positions
+      motif_score = []
+
+      for line in open(ps_out_file, 'r'):
+        motif_score.append(float(line.split("\t")[-2]))
+      logging.debug(motif_score)
+
+      parsed_ppr = []
+      for pos_start, pos_end, score in zip(refinedpos[0], refindpos_end_2nd, motif_score):
+        mypos = sequence[pos_start:pos_end]
+        mypos.id = f'{sequence.id}'
+        mypos.annotations = {
+          "PS_SCORE": score,
+          "PPR_STARTS": pos_start + 1,
+          "PPR_ENDS": pos_end,
+          "FIFTH_AA": sequence[pos_start + 4],
+          "LAST_AA": sequence[pos_end - 1],
+          "PPR_CODE": sequence[pos_start + 4] + sequence[pos_end - 1],
+          "RNA_BASE": code2rna_multi[sequence[pos_start + 4] + sequence[pos_end - 1]]
+          if sequence[pos_start + 4] + sequence[pos_end - 1] in code2rna_multi.keys() else '?',
+        }
+        parsed_ppr.append(mypos)
+
+      return parsed_ppr
     except Exception as e:
-      logging.warning("Oops! Something wrong happens with the following sequence!")
-      logging.warning(f"--->{s.id}")
-      traceback.print_exc() if debug else logging.warning(e)
-    finally:
-      logging.debug(refindpos_end_2nd)
-
-    logging.debug(match_motif)
-    logging.debug(refinedpos)
-
-    # extract motifs scores according to the match positions
-    motif_score = []
-
-    for line in open(ps_out_file, 'r'):
-      motif_score.append(float(line.split("\t")[-2]))
-    logging.debug(motif_score)
-
-    parsed_ppr = []
-    for pos_start, pos_end, score in zip(refinedpos[0], refindpos_end_2nd, motif_score):
-      mypos = sequence_[pos_start:pos_end]
-      mypos.id = f'{s.id}'
-      mypos.annotations = {
-        "PS_SCORE": score,
-        "PPR_STARTS": pos_start + 1,
-        "PPR_ENDS": pos_end,
-        "FIFTH_AA": sequence_[pos_start + 4],
-        "LAST_AA": sequence_[pos_end - 1],
-        "PPR_CODE": sequence_[pos_start + 4] + sequence_[pos_end - 1],
-        "RNA_BASE": code2rna_multi[sequence_[pos_start + 4] + sequence_[pos_end - 1]]
-        if sequence_[pos_start + 4] + sequence_[pos_end - 1] in code2rna_multi.keys() else '?',
-      }
-      parsed_ppr.append(mypos)
-
-    return parsed_ppr
-  except Exception as e:
-    logging.warning("Oops! Something wrong happens with the following sequence!")
-    logging.warning(f"--->{s.id}")
-    traceback.print_exc() if debug else logging.warning(e)
+      logging.error("Oops! Something wrong happens with the following sequence!")
+      logging.error(f"--->{sequence.id}")
+      logging.error(e)
 
 
-def pprfinder(f, s, debug, RES_DIR_FIND, profile_dir, bin_dir, ):
-  logging.debug(s.id)
-  sequence_ = s
-  with  tempfile.NamedTemporaryFile(suffix=f'_{s.id}.fasta', delete=True) as tmp_fasta_file:
-    SeqIO.write(s, tmp_fasta_file.name, "fasta")
+def pprfinder(sequence, RES_DIR_FIND, profile_dir, bin_dir, ):
+  logging.debug(sequence.id)
+  with tempfile.NamedTemporaryFile(suffix=f'_{sequence.id}.fasta', delete=True) as tmp_fasta_file:
+    SeqIO.write(sequence, tmp_fasta_file.name, "fasta")
 
     # run scanning
-    hmmsearch_out_file = pathlib.Path(f"{RES_DIR_FIND}/{s.id}_PPR_HMMSEARCH.domt").resolve()
+    hmmsearch_out_file = pathlib.Path(f"{RES_DIR_FIND}/{sequence.id}_PPR_HMMSEARCH.domt").resolve()
 
     # recommended setting from Small's Lab. see https://github.com/ian-small/OneKP
     cmd_1 = f"hmmsearch --domtblout {hmmsearch_out_file} --noali -E 0.1 --cpu 2 {profile_dir}/all_PPR.hmm {tmp_fasta_file.name} > /dev/null"
@@ -254,7 +249,7 @@ def pprfinder(f, s, debug, RES_DIR_FIND, profile_dir, bin_dir, ):
     os.system(cmd_2)
 
     # expected output: f'{}{s.id}_PPR_HMMSEARCH.domt_motifs.txt'}
-    ppr_df = pd.read_table(f'{RES_DIR_FIND}/{s.id}_PPR_HMMSEARCH.domt_motifs.txt',
+    ppr_df = pd.read_table(f'{RES_DIR_FIND}/{sequence.id}_PPR_HMMSEARCH.domt_motifs.txt',
                            names=['id', 'start', 'end', 'score', 'motif_seq', 'second', 'fifth_aa', 'last_aa',
                                   'motif_type'])
     logging.debug(ppr_df)
@@ -262,8 +257,8 @@ def pprfinder(f, s, debug, RES_DIR_FIND, profile_dir, bin_dir, ):
     for pos_start, pos_end, score, motif_type, fifth, last, motif_seq in zip(ppr_df.start, ppr_df.end, ppr_df.score,
                                                                              ppr_df.motif_type, ppr_df.fifth_aa,
                                                                              ppr_df.last_aa, ppr_df.motif_seq):
-      mypos = sequence_[pos_start:pos_end]
-      mypos.id = f'{s.id}'
+      mypos = sequence[pos_start:pos_end]
+      mypos.id = f'{sequence.id}'
       mypos.annotations = {
         "PPR_TYPE": motif_type,
         "PS_SCORE": score,
@@ -323,7 +318,6 @@ def draw_my_ppr(s, ppr, features, cmap, scores, program, fixed_plot_width, RES_D
            'Edge': 'Motif Edge',
            'Type': 'Type'}
   for feature in features:
-    assert feature in draw_features, 'Haiyaahh!'
 
     record = GraphicRecord(sequence_length=len(s.seq), features=draw_features[feature])
     ax, _ = record.plot(figure_width=fixed_plot_width if fixed_plot_width != 0 else len(s.seq) / 20)
@@ -332,7 +326,7 @@ def draw_my_ppr(s, ppr, features, cmap, scores, program, fixed_plot_width, RES_D
     ax.figure.savefig(f'{RES_DIR_FIGURE}/{feature}-{s.id}.png')
 
 
-def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program, debug):
+def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program):
   pkls_files = glob.glob(f'{RES_DIR_PICKLE}/*.pkl')
   process_id = time.strftime("%Y%m%d_%H%M%S", time.localtime())
   xlsx_filename = f"{RES_DIR_REPORT}/PPRCODE_RESULTS_{process_id}.xlsx"
@@ -344,7 +338,7 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program, 
     'subject': 'https://github.com/YaoYinYing/PPRCODE_Guideline',
     'author': 'PPRCODE project',
     'manager': 'Yan et al.',
-    'comments': 'Created with pprcode project.'})
+    'comments': 'Created with PPRCODE project.'})
 
   total = len(pkls_files)
 
@@ -396,20 +390,20 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program, 
           report_md_write_handle.write(f"{' | '.join([str(x) for x in motif_info])}\n")
 
         report_md_write_handle.write(f'\n#### Plots\n')
-        report_md_write_handle.write(f'![Colorbar](figure/Colorbar-{program}.png)\n')
+        report_md_write_handle.write(f'![Colorbar](./figure/Colorbar-{program}.png)\n')
         for feature in plot_feature:
-          report_md_write_handle.write(f'![{feature}-{seq_id}](figure/{feature}-{seq_id}.png)\n')
+          report_md_write_handle.write(f'![{feature}-{seq_id}](./figure/{feature}-{seq_id}.png)\n')
         report_md_write_handle.write('\n\n')
       except Exception as e:
-        logging.warning("Oops! Something wrong happens when writing in to excel report!")
-        logging.warning(seq_id)
-        traceback.print_exc() if debug else logging.warning(e)
+        logging.error("Oops! Something wrong happens when writing in to excel report!")
+        logging.error(seq_id)
+        logging.error(e)
 
 
     except Exception as e:
-      logging.warning("Oops! Something wrong happens when loading pickle file!")
-      logging.warning(seq_id)
-      traceback.print_exc() if debug else logging.warning(e)
+      logging.error("Oops! Something wrong happens when loading pickle file!")
+      logging.error(seq_id)
+      logging.error(e)
 
   report_md_write_handle.write(f'---\n\n'
                                f'**End of the report**\n\n'
@@ -521,17 +515,15 @@ def main(argv):
   bin_dir = pathlib.Path(FLAGS.bin_dir).resolve()
   profile_dir = pathlib.Path(FLAGS.profile_dir).resolve()
   plot_color_scheme = FLAGS.plot_color_scheme
-
   plot_item = FLAGS.plot_item
 
   generate_excel_report = FLAGS.report
-  debug = FLAGS.debug
-  logging.set_verbosity(logging.DEBUG) if debug else logging.set_verbosity(logging.INFO)
+  logging.set_verbosity(logging.DEBUG) if FLAGS.debug else logging.set_verbosity(logging.INFO)
+
   run_benchmark = FLAGS.run_benchmark
   fix_gap = FLAGS.fix_gap
 
   RES_DIR = pathlib.Path(FLAGS.save_dir).resolve()
-  logging.debug(plot_item)
 
   # PS_SCAN zone
   RES_DIR_SCAN = RES_DIR.joinpath('scan')
@@ -545,6 +537,9 @@ def main(argv):
   RES_DIR_FEATURE = RES_DIR.joinpath('feature')
   RES_DIR_FIGURE = RES_DIR.joinpath('figure')
 
+  if not os.path.exists(FASTA_FP):
+    logging.fatal(f'FASTA file is not available: {FASTA_FP}')
+
   for dir in [RES_DIR, RES_DIR_SCAN, RES_DIR_FIND, RES_DIR_PICKLE, RES_DIR_REPORT, RES_DIR_FEATURE,
               RES_DIR_FIGURE]:
     os.makedirs(dir, exist_ok=True)
@@ -554,14 +549,14 @@ def main(argv):
   elif program.startswith('PPR') or program.startswith('ppr'):
     program = 'PPRfinder'
   else:
-    raise ValueError(f'Unknown program: {FLAGS.program}')
+    logging.fatal(f'Unknown program: {FLAGS.program}')
 
-  plot_ppr = True if 'ppr' in plot_item else False
-  plot_rna = True if 'rna' in plot_item else False
-  plot_score = True if 'score' in plot_item else False
-  plot_edge = True if 'edge' in plot_item else False
-  plot_type = True if 'type' in plot_item else False
-  plot_color_bar = True if 'bar' in plot_item else False
+  plot_ppr = ('ppr' in plot_item )
+  plot_rna = ('rna' in plot_item )
+  plot_score = ('score' in plot_item )
+  plot_edge = ( 'edge' in plot_item )
+  plot_type = ('type' in plot_item )
+  plot_color_bar = ('bar' in plot_item )
 
   # @markdown - `fix_gap` -
   if run_benchmark:
@@ -577,23 +572,21 @@ def main(argv):
   job_list = [s for s in SeqIO.parse(FASTA_FP, 'fasta')]
   logging.debug(len(job_list))
 
-  for s in job_list:
-    if not os.path.exists(f'{RES_DIR_PICKLE}/{s.id}.pkl'):
-      logging.info(f'processing {str(s.id)} ...')
+  for sequence in job_list:
+    if not os.path.exists(f'{RES_DIR_PICKLE}/{sequence.id}.pkl'):
+      logging.info(f'processing {str(sequence.id)} ...')
       if program == 'PS_Scan':
-        ppr = ps_scan(FASTA_FP, s, debug=debug, RES_DIR_SCAN=RES_DIR_SCAN, profile_dir=profile_dir, bin_dir=bin_dir,
+        ppr = ps_scan(sequence=sequence, RES_DIR_SCAN=RES_DIR_SCAN, profile_dir=profile_dir, bin_dir=bin_dir,
                       fix_gap=fix_gap)
       elif program == 'PPRfinder':
-        ppr = pprfinder(FASTA_FP, s, debug=debug, RES_DIR_FIND=RES_DIR_FIND, profile_dir=profile_dir, bin_dir=bin_dir)
+        ppr = pprfinder(sequence=sequence, RES_DIR_FIND=RES_DIR_FIND, profile_dir=profile_dir, bin_dir=bin_dir)
       else:
-        raise ValueError('What do you want me to do haiyaaaah?')
+        logging.fatal(f'Unknown program {program}!')
 
-      pickle.dump(ppr, open(f'{RES_DIR_PICKLE}/{s.id}.pkl', 'wb'))
+      pickle.dump(ppr, open(f'{RES_DIR_PICKLE}/{sequence.id}.pkl', 'wb'))
 
   fixed_plot_width = 20
-
-  cmap = cm.get_cmap(plot_color_scheme)
-  pkls_files = glob.glob(f'{RES_DIR_PICKLE}/*.pkl')
+  cmap = matplotlib.colormaps[plot_color_scheme]
 
   job_list = {s.id: s for s in SeqIO.parse(FASTA_FP, 'fasta')}
 
@@ -603,7 +596,8 @@ def main(argv):
     if type(data) == list:
       scores += [sc for p in data for sc in [p.annotations["PS_SCORE"]]]
 
-  assert len(scores) != 0, f'Ohhhhh it seems like no PPR motif are detected by {program} !'
+  if len(scores) == 0:
+    logging.error(f'Ohhhhh it seems like no PPR motif are detected by {program} !')
   logging.info(f'score minima: {min(scores)}')
   logging.info(f'score maxima: {max(scores)}')
 
@@ -613,7 +607,6 @@ def main(argv):
     fig.subplots_adjust(bottom=0.5)
 
     norm = matplotlib.colors.Normalize(vmin=min(scores), vmax=max(scores))
-
     fig.colorbar(matplotlib.cm.ScalarMappable(norm=norm, cmap=cmap),
                  cax=ax, orientation='horizontal', label=f'{program} Score')
     fig.savefig(f'{RES_DIR_FIGURE}/Colorbar-{program}.png')
@@ -628,28 +621,33 @@ def main(argv):
   for s in job_list.keys():
     logging.info(f'plotting {str(s)} ...')
     data = pickle.load(open(f'{RES_DIR_PICKLE}/{s}.pkl', 'rb'))
-    # logging.info(s)
+
     try:
-      draw_my_ppr(s=job_list[s], ppr=data, features=what_to_plot,
-                  cmap=cmap, scores=scores, program=program,
-                  fixed_plot_width=fixed_plot_width, RES_DIR_FIGURE=RES_DIR_FIGURE)
+      draw_my_ppr(s=job_list[s],
+                  ppr=data,
+                  features=what_to_plot,
+                  cmap=cmap,
+                  scores=scores,
+                  program=program,
+                  fixed_plot_width=fixed_plot_width,
+                  RES_DIR_FIGURE=RES_DIR_FIGURE)
     except Exception as e:
-      traceback.print_exc()
+      logging.warning(e)
 
   if generate_excel_report:
     logging.info(f'generating report ...')
-    generate_full_report(RES_DIR_REPORT=RES_DIR_REPORT, RES_DIR_PICKLE=RES_DIR_PICKLE, plot_feature=what_to_plot,
-                         program=program, debug=debug)
+    generate_full_report(RES_DIR_REPORT=RES_DIR_REPORT,
+                         RES_DIR_PICKLE=RES_DIR_PICKLE,
+                         plot_feature=what_to_plot,
+                         program=program)
 
   zipped = f'PPRCODE_results.zip'
   os.system(f"zip -FSr {RES_DIR}/{zipped} {RES_DIR} >/dev/null")
   logging.info(f'Done! Data zipped and stored as {zipped}')
   logging.info(citations_banner)
 
-
 if __name__ == '__main__':
   flags.mark_flags_as_required([
     'fasta',
-
   ])
   app.run(main)
