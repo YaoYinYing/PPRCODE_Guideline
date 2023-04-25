@@ -10,6 +10,7 @@ modules:
             - COPY /home/biolib/pprcode/save_dir/PPRCODE_results.zip /
         source_files:
             - COPY / /home/biolib/pprcode/
+        main_output_file: /home/biolib/pprcode/save_dir/PPRCODE_results.md
 arguments:
     -
         default_value: /input.fa
