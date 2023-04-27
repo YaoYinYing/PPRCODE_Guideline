@@ -56,7 +56,7 @@ jobs:
 
     - name: Update Readme file for CI actions
       run: |
-        awk '{if ($0 !~ "https://img.shields.io && $0 !~ "https://tinyurl.com/pprcode-badge" && $0 !~ "badge.svg" ){print }}' README.md >README.ci.md
+        awk '{if ($0 !~ "https://img.shields.io" && $0 !~ "https://tinyurl.com/pprcode-badge" && $0 !~ "badge.svg" ){print }}' README.md >README.ci.md
         cat README.ci.md
 
     - name: Refresh Docker Hub Description
