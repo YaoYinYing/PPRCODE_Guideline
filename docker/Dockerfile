@@ -8,7 +8,7 @@ SHELL ["/bin/bash", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -qy  \
     && apt-get install -qy ca-certificates \
     && apt-get install -qy ${JDK_VER} \
-    && apt-get install -qy python3 python3-dev python3-venv python3-pip zip hmmer perl wget 
+    && apt-get install -qy python3 python3-dev python3-venv python3-pip zip hmmer perl wget \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
