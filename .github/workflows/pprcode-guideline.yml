@@ -19,10 +19,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+    # - name: Upload coverage reports to Codecov
+    #   uses: codecov/codecov-action@v3
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
       
     - name: Set environment variable with current date
       run: |
