@@ -18,6 +18,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
       
     - name: Set environment variable with current date
       run: |
