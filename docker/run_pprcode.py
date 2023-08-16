@@ -105,19 +105,19 @@ FLAGS = flags.FLAGS
 
 
 def ps_scan(sequence, RES_DIR_SCAN, profile_dir, bin_dir, fix_gap):
-    """
-    Run PS_Scan on the given sequence.
+  """
+  Run PS_Scan on the given sequence.
 
-    Parameters:
-    sequence (SeqRecord): The sequence to scan.
-    RES_DIR_SCAN (str): The directory to save the scan results.
-    profile_dir (str): The directory containing the Prosite profile.
-    bin_dir (str): The directory containing the PS_Scan binary.
-    fix_gap (bool): Whether to fix gaps in the sequence scanning results.
+  Parameters:
+  sequence (SeqRecord): The sequence to scan.
+  RES_DIR_SCAN (str): The directory to save the scan results.
+  profile_dir (str): The directory containing the Prosite profile.
+  bin_dir (str): The directory containing the PS_Scan binary.
+  fix_gap (bool): Whether to fix gaps in the sequence scanning results.
 
-    Returns:
-    list: A list of SeqRecord objects representing the PPR motifs found in the sequence.
-    """
+  Returns:
+  list: A list of SeqRecord objects representing the PPR motifs found in the sequence.
+  """
   logging.debug(sequence.id)
   with tempfile.NamedTemporaryFile(suffix=f'_{sequence.id}.fasta', delete=True) as tmp_fasta_file:
     SeqIO.write(sequence, tmp_fasta_file.name, "fasta")
@@ -248,18 +248,18 @@ def ps_scan(sequence, RES_DIR_SCAN, profile_dir, bin_dir, fix_gap):
 
 
 def pprfinder(sequence, RES_DIR_FIND, profile_dir, bin_dir, ):
-    """
-    Run PPRfinder on the given sequence.
+  """
+  Run PPRfinder on the given sequence.
 
-    Parameters:
-    sequence (SeqRecord): The sequence to scan.
-    RES_DIR_FIND (str): The directory to save the find results.
-    profile_dir (str): The directory containing the PPRfinder profile.
-    bin_dir (str): The directory containing the PPRfinder binary.
+  Parameters:
+  sequence (SeqRecord): The sequence to scan.
+  RES_DIR_FIND (str): The directory to save the find results.
+  profile_dir (str): The directory containing the PPRfinder profile.
+  bin_dir (str): The directory containing the PPRfinder binary.
 
-    Returns:
-    list: A list of SeqRecord objects representing the PPR motifs found in the sequence.
-    """
+  Returns:
+  list: A list of SeqRecord objects representing the PPR motifs found in the sequence.
+  """
   logging.debug(sequence.id)
   with tempfile.NamedTemporaryFile(suffix=f'_{sequence.id}.fasta', delete=True) as tmp_fasta_file:
     SeqIO.write(sequence, tmp_fasta_file.name, "fasta")
@@ -300,39 +300,39 @@ def pprfinder(sequence, RES_DIR_FIND, profile_dir, bin_dir, ):
 
 
 def renormalize(n, range1, range2):
-    """
-    Renormalize a number from one range to another.
+  """
+  Renormalize a number from one range to another.
 
-    Parameters:
-    n (float): The number to renormalize.
-    range1 (tuple): The original range.
-    range2 (tuple): The new range.
+  Parameters:
+  n (float): The number to renormalize.
+  range1 (tuple): The original range.
+  range2 (tuple): The new range.
 
-    Returns:
-    float: The renormalized number.
-    """
+  Returns:
+  float: The renormalized number.
+  """
   delta1 = range1[1] - range1[0]
   delta2 = range2[1] - range2[0]
   return (delta2 * (n - range1[0]) / delta1) + range2[0]
 
 
 def draw_my_ppr(s, ppr, features, cmap, scores, program, fixed_plot_width, RES_DIR_FIGURE):
-    """
-    Draw a plot of the PPR motifs in the sequence.
+  """
+  Draw a plot of the PPR motifs in the sequence.
 
-    Parameters:
-    s (SeqRecord): The sequence.
-    ppr (list): A list of SeqRecord objects representing the PPR motifs.
-    features (list): A list of features to include in the plot.
-    cmap (Colormap): The colormap to use for the plot.
-    scores (list): A list of scores for the PPR motifs.
-    program (str): The program used to find the PPR motifs.
-    fixed_plot_width (int): The fixed width of the plot.
-    RES_DIR_FIGURE (str): The directory to save the figure.
+  Parameters:
+  s (SeqRecord): The sequence.
+  ppr (list): A list of SeqRecord objects representing the PPR motifs.
+  features (list): A list of features to include in the plot.
+  cmap (Colormap): The colormap to use for the plot.
+  scores (list): A list of scores for the PPR motifs.
+  program (str): The program used to find the PPR motifs.
+  fixed_plot_width (int): The fixed width of the plot.
+  RES_DIR_FIGURE (str): The directory to save the figure.
 
-    Returns:
-    None
-    """
+  Returns:
+  None
+  """
   draw_features = {
     'Motif': [
       GraphicFeature(start=a, end=b, color=cmap(renormalize(float(c), [min(scores), max(scores)], [0, 1])),
@@ -379,18 +379,18 @@ def draw_my_ppr(s, ppr, features, cmap, scores, program, fixed_plot_width, RES_D
 
 
 def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program):
-    """
-    Generate a full report of the PPR motifs found in all sequences.
+  """
+  Generate a full report of the PPR motifs found in all sequences.
 
-    Parameters:
-    RES_DIR_PICKLE (str): The directory containing the pickled PPR motifs.
-    RES_DIR_REPORT (str): The directory to save the report.
-    plot_feature (list): A list of features to include in the plot.
-    program (str): The program used to find the PPR motifs.
+  Parameters:
+  RES_DIR_PICKLE (str): The directory containing the pickled PPR motifs.
+  RES_DIR_REPORT (str): The directory to save the report.
+  plot_feature (list): A list of features to include in the plot.
+  program (str): The program used to find the PPR motifs.
 
-    Returns:
-    None
-    """
+  Returns:
+  None
+  """
   pkls_files = glob.glob(f'{RES_DIR_PICKLE}/*.pkl')
   process_id = time.strftime("%Y%m%d_%H%M%S", time.localtime())
   xlsx_filename = f"{RES_DIR_REPORT}/PPRCODE_RESULTS_{process_id}.xlsx"
@@ -482,18 +482,18 @@ def generate_full_report(RES_DIR_PICKLE, RES_DIR_REPORT, plot_feature, program):
 
 
 def write_excel_tables(test_book, sequence_name, ppr_total_list_reversed, program):
-    """
-    Write the PPR motifs of a sequence to an Excel workbook.
+  """
+  Write the PPR motifs of a sequence to an Excel workbook.
 
-    Parameters:
-    test_book (Workbook): The Excel workbook.
-    sequence_name (str): The name of the sequence.
-    ppr_total_list_reversed (list): A list of PPR motifs in reverse order.
-    program (str): The program used to find the PPR motifs.
+  Parameters:
+  test_book (Workbook): The Excel workbook.
+  sequence_name (str): The name of the sequence.
+  ppr_total_list_reversed (list): A list of PPR motifs in reverse order.
+  program (str): The program used to find the PPR motifs.
 
-    Returns:
-    None
-    """
+  Returns:
+  None
+  """
   # reversed ppr code result list for making xlsx file
 
   code_count_result_name = f"PPR motifs and PPR codes: {sequence_name}"
@@ -580,15 +580,15 @@ def write_excel_tables(test_book, sequence_name, ppr_total_list_reversed, progra
 
 
 def main(argv):
-    """
-    The main function of the script.
+  """
+  The main function of the script.
 
-    Parameters:
-    argv (list): The command-line arguments.
+  Parameters:
+  argv (list): The command-line arguments.
 
-    Returns:
-    None
-    """
+  Returns:
+  None
+  """
   if len(argv) > 1:
     raise app.UsageError('Too many command-line arguments.')
   logging.info(banner)
