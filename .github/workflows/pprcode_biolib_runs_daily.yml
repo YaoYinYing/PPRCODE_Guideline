@@ -1,6 +1,9 @@
 name: Generate BioLib Runs Badge
 
 on:
+  push:
+    paths:
+      - '.github/workflows/pprcode_biolib_runs_daily.yml' # Monitor the entire 'docker' directory
   schedule:
     - cron: "0 0 * * *"
 
