@@ -12,7 +12,7 @@ _Cover Image is presented with [**MolecularNodes Project**](https://github.com/B
 ----
 [![PPRCODE Workflow](https://github.com/YaoYinYing/PPRCODE_Guideline/actions/workflows/pprcode-guideline.yml/badge.svg)](https://github.com/YaoYinYing/PPRCODE_Guideline/actions/workflows/pprcode-guideline.yml)
 [![Docker Image Pulls](https://img.shields.io/docker/pulls/yaoyinying/pprcode)](https://hub.docker.com/r/yaoyinying/pprcode)
-[![BioLib program Runs](image/badges/BioLib_Runs.svg)](https://biolib.com/YaoYinYing/pprcode/)
+[![BioLib program Runs](image/badges/BioLib_Runs_badge.svg)](https://biolib.com/YaoYinYing/pprcode/)
 ----
 
 # PPRCODE
