@@ -39,7 +39,7 @@ jobs:
       - name: Compare old and new badge
         id: compare_badges
         run: |
-          if diff -q image/badges/BioLib_Runs_badge.svg image/badges/BioLib_Runs_badge.svg.bak; then
+          if [[ "$(diff -q image/badges/BioLib_Runs_badge.svg image/badges/BioLib_Runs_badge.svg.bak)" == "" ]]; then
             echo "Badges are the same. Skipping the rest of the steps."
             echo "badge_changed=false" >> $GITHUB_STATE
           else
