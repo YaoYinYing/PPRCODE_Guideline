@@ -43,7 +43,7 @@ jobs:
             echo "Badges are the same. Skipping the rest of the steps."
             echo "badge_changed=false" >> $GITHUB_STATE
           else
-            echo "badge_changed=Ttrue" >> $GITHUB_STATE
+            echo "badge_changed=true" >> $GITHUB_STATE
           fi
 
       - name: Commit and push new badge
