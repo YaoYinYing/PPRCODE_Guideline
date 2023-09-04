@@ -41,13 +41,13 @@ jobs:
         run: |
           if [[ "$(diff -q image/badges/BioLib_Runs_badge.svg image/badges/BioLib_Runs_badge.svg.bak)" == "" ]]; then
             echo "Badges are the same. Skipping the rest of the steps."
-            echo "badge_changed=0" >> $GITHUB_STATE
+            echo "badge_changed=CHANGED" >> $GITHUB_STATE
           else
-            echo "badge_changed=1" >> $GITHUB_STATE
+            echo "badge_changed=UNCHANGED" >> $GITHUB_STATE
           fi
 
       - name: Commit and push new badge
-        if: steps.compare_badges.outputs.badge_changed -eq 1
+        if: steps.compare_badges.outputs.badge_changed == "CHANGED"
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
