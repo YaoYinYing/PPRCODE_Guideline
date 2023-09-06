@@ -36,23 +36,17 @@ jobs:
         run: |
           curl -o image/badges/BioLib_Runs_badge.svg "https://img.shields.io/badge/BioLib_Runs-${{ env.BIOLIB_RUNS }}-55b5a6"
 
-      - name: Compare old and new badge
+      - name: Compare old and new badge to create a git commit
         id: compare_badges
         run: |
           if [[ "$(diff -q image/badges/BioLib_Runs_badge.svg image/badges/BioLib_Runs_badge.svg.bak)" == "" ]]; then
             echo "Badges are the same. Skipping the rest of the steps."
-            echo "badge_changed=false" >> $GITHUB_STATE
           else
             echo "Badges are differed. Creating a new commit."
-            echo "badge_changed=true" >> $GITHUB_STATE
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git add image/badges/BioLib_Runs_badge.svg
+            git commit -m "Update BioLib run number to ${{ env.BIOLIB_RUNS }}"
+            git push
           fi
-
-      - name: Commit and push new badge
-        if: steps.compare_badges.outputs.badge_changed
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add image/badges/BioLib_Runs_badge.svg
-          git commit -m "Update BioLib run number to ${{ env.BIOLIB_RUNS }}"
-          git push
 
