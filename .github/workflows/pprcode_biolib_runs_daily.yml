@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip3 install -U pybiolib
+          pip3 install pybiolib==1.1.1423
 
       - name: Fetch BioLib Runs count
         run: |
