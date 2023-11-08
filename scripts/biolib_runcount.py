@@ -5,5 +5,5 @@ import biolib
 
 biolib.sign_in()
 p=biolib.api.client
-pp=p.get(url='/apps/',params={'account_handle':'YaoYinYing','app_name':'pprcode'})
+pp=p.get(path='/apps/',params={'account_handle':'YaoYinYing','app_name':'pprcode'})
 print(pp.json()['results'][0]['job_count'])
